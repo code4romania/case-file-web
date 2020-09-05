@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+        <p>Titlu sectiune*</p>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="form-group">
+        <input type="text" class="form-control" placeholder="ex: Evaluarea personalitatii copilului..." [(ngModel)]="section.title">                 
+        </div>
+    </div>            
+</div>
+<div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <p>Descriere sectiune</p>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="ex: pentru fiecare arie se vor mentiona obligatoriu..." [(ngModel)]="section.description">                  
+      </div>
+    </div>            
+</div>
+
+<ng-template #question>
+
+</ng-template>
+
+<div class="row">            
+    <div class="col-md-12" align="middle">
+        <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" (click)="addQuestion()">Adauga o intrebare in sectiune</button>
+    </div>
+</div>
+<hr class="my-0" style="padding-bottom: 1.5rem;">

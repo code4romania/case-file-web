@@ -1,0 +1,94 @@
+<div class="row" style="padding-bottom: 1.5rem;">
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <p>Titlu intrebare*</p>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="ex: Dezvoltarea senzoriala" [(ngModel)]="currentQuestion.text">              
+            </div>
+          </div>            
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <p>Text suport</p>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="ex: integritatea sau afectarea senzoriala (descriere)" [(ngModel)]="currentQuestion.hint">              
+            </div>
+          </div>            
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <p>Tip camp*</p>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="form-group">
+              <select class="form-control" value="currentQuestion.questionType" (change)="questionTypeChange($event, currentQuestion)" [(ngModel)]="currentQuestion.questionType">                            
+                <option value="4" selected="selected">Text</option>
+                <option value="5">Numar</option>
+                <option value="6">Data</option>
+                <option value="1">Selectie simpla</option>
+                <option value="0">Selectie multipla</option>
+              </select>
+            </div>
+          </div>            
+        </div>
+        <div class="row" *ngIf="!showOptions">
+          <div class="col-md-3">
+            <div class="form-group">
+              <p>Nr. caractere</p>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="form-group">
+              <input type="number" class="form-control" placeholder="ex: 300" [(ngModel)]="currentQuestion.charsNo">
+            </div>
+          </div>            
+        </div>
+        <div class="row"  *ngIf="showOptions">
+          <div class="col-md-3">
+            <div class="form-group">
+              <p>Option text</p>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="" [(ngModel)]="currentQuestion.optionsToQuestions[0].text">              
+              <br/>
+              <input type="text" class="form-control" placeholder="" [(ngModel)]="currentQuestion.optionsToQuestions[1].text">
+
+              <ng-template #option>
+              </ng-template>
+            </div>  
+          </div>
+          <div class="col-md-12" align="right">
+            <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" (click)="addOption()">Adauga optiune</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <p>Obligatoriu</p>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="form-group">
+              <input type="checkbox" value="currentQuestion.isMandatory" [(ngModel)]="currentQuestion.isMandatory">
+            </div>
+          </div>            
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

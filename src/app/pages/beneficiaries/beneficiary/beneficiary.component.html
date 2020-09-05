@@ -1,0 +1,364 @@
+<div class="header pb-5 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">      
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid" style="margin-top: -7.5rem !important;"> <!-- mt--7 -->
+  <!-- Table -->
+  <div class="row" style="padding-bottom: 20px;">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0" style="padding-bottom: 0px;">
+          <div class="row">
+            <div class="col-md-10">
+              <h3 class="mb-0" style="color: #3468EF;">Date beneficiar</h3>
+              <p style="color: #23278A">Acestea sunt informatiile de baza despre beneficiar.</p>
+            </div>
+            <div class="col-md-2" align="right">
+              <img src="./assets/img/icons/common/edit.png" style="padding-right: 5px;" [routerLink]="['/beneficiary-info']" (click)="editBeneficiary()">
+            </div>
+          </div>
+        </div>
+        <!-- Divider -->
+        <hr class="my-0">
+        <div class="card-body border-0">
+          <div class="row">
+            <div class="col-md-3">
+              <p>Nume:</p>
+            </div>
+            <div class="col-md-3">
+              <label><b>{{ beneficiary.name }}</b></label>
+            </div>
+            <div class="col-md-2">
+              <p>Judet:</p>
+            </div>
+            <div class="col-md-4">
+              <label><b>{{ beneficiary.county }}</b></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <p>Data nasterii:</p>
+            </div>
+            <div class="col-md-3">
+              <label><b>{{ beneficiary.birthDateString }}</b></label>
+            </div>
+            <div class="col-md-2">
+              <p>Localitate:</p>
+            </div>
+            <div class="col-md-4">
+              <label><b>{{ beneficiary.city }}</b></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <p>Stare civila:</p>
+            </div>
+            <div class="col-md-3">
+              <!-- <label><b>{{ beneficiary.civilStatus }}</b></label> -->
+              <label *ngIf="beneficiary.civilStatus===0"><b>necasatorit/a</b></label>
+              <label *ngIf="beneficiary.civilStatus===1"><b>casatorit/a</b></label>
+              <label *ngIf="beneficiary.civilStatus===2"><b>divortat/a</b></label>
+              <label *ngIf="beneficiary.civilStatus===3"><b>vaduv/a</b></label>
+              <label *ngIf="beneficiary.civilStatus===4"><b>concubinaj</b></label>
+            </div>
+            <div class="col-md-2">
+              <p>Gen:</p>
+            </div>
+            <div class="col-md-4">
+              <label *ngIf="beneficiary.gender===1"><b>feminin</b></label>
+              <label *ngIf="beneficiary.gender===0"><b>masculin</b></label>
+            </div>
+          </div>
+          <!-- Divider -->
+          <hr class="my-3">
+          <div class="row">
+            <div class="col-md-3">
+              <p>Membri familie:</p>
+            </div>
+            <div class="col-md-3">
+              <table ng-if="beneficiary.familyMembers">
+                <tbody>
+                  <tr *ngFor="let member of beneficiary.familyMembers">
+                    <td><b>{{ member.name }}</b></td>
+                  </tr>
+                </tbody>
+              </table>
+              <label *ngIf="!beneficiary.familyMembers"><b>-</b></label>
+            </div>
+            <div class="col-md-2">
+              <p>Asistent:</p>
+            </div>
+            <div class="col-md-4">
+              <label><b>{{ beneficiary.assistantName }}</b></label>
+            </div>
+          </div>
+        </div>            
+      </div>
+    </div>
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0" style="padding-bottom: 0px;">
+          <div class="row">
+            <div class="col-md-10">
+              <h3 class="mb-0" style="color: #3468EF;">Formulare alocate</h3>
+              <p style="color: #23278A">Acestea sunt formularele pe care le vei completa pentru acest beneficiar.</p>
+            </div>
+            <div class="col-md-2" align="right">
+              <img src="./assets/img/icons/common/edit.png" style="padding-right: 5px;" [routerLink]="['/forms-selection']" (click)="editBeneficiary()">
+            </div>
+          </div>
+        </div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col" style="color: #3468EF;">Nr.</th>
+                  <th scope="col" style="color: #3468EF;">Denumire formular</th>                
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let form of allocatedForms">
+                  <td style="width: 3%;">
+                    {{ (allocatedFormsPage - 1) * allocatedFormsPageSize + allocatedForms.indexOf(form) + 1 }}
+                  </td>                  
+                  <td>
+                    {{ form.description }}
+                  </td>                
+                  <td class="text-right" style="width: 3%;">
+                    <a class="btn btn-sm btn-icon-only text-light" [routerLink]="['/form', form.formId]" (click)="formSelected(form)">
+                      <img src="./assets/img/icons/common/add_beneficiary.png">
+                    </a>
+                  </td>
+                </tr>              
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer py-4">
+            <nav aria-label="...">
+              <div class="row align-items-center justify-content-xl-between">
+                <div class="col-md-6">                                 
+                </div>
+                <div class="col-md-6">
+                  <app-pagination [page]="allocatedFormsPage" [pageSize]="allocatedFormsPageSize"
+                    [totalItems]="allocatedFormsTotalCount" (pageChanged)="allocatedFormsPageChanged($event)">
+                  </app-pagination>
+                </div>
+              </div>
+            </nav>
+          </div>        
+      </div>
+    </div>
+  </div>
+  <div class="row" style="padding-bottom: 20px;">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0" style="padding-bottom: 0px;">
+          <div class="row">
+            <div class="col-md-6">
+              <h3 class="mb-0" style="color: #3468EF;">Istoric evaluare</h3>
+              <p style="color: #23278A">Aici poti vedea istoricul beneficiarului.</p>
+            </div>
+            <div class="col-md-6" align="right">
+              <!-- <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" [routerLink]="['/forms-selection']" (click)="editAssignedForms()">
+                <img src="./assets/img/icons/common/mdi_file_copy.png" style="padding-right: 5px;" >Completeaza formular</button> -->
+            </div>
+          </div>
+        </div>
+        <!-- Divider -->
+        <hr class="my-0">
+        <div class="card-header border-0"> 
+          <div class="row">
+            <div class="col-md-auto">
+              <p>Cauta: </p>
+            </div>         
+            <div class="col-md-3" style="padding-left: 0px; ">            
+              <div class="form-group">                
+                <input type="text" class="form-control">
+              </div>
+            </div>
+        </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" style="color: #3468EF; width: 5%;">Nr.</th>
+                <th scope="col" style="color: #3468EF;">Denumire formular</th>
+                <th scope="col" style="color: #3468EF; width: 15%;">Completat de</th>
+                <th scope="col" style="color: #3468EF; width: 10%;">Data</th>
+                <th scope="col" style="width: 10%;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let form of completedForms">
+                <td style="width: 5%;">
+                  {{ (page - 1) * pageSize + completedForms.indexOf(form) + 1 }}
+                </td>
+                <td>
+                  {{ form.description }}
+                </td>
+                <td style="width: 15%;">
+                  {{ form.userName }}
+                </td>                
+                <td style="width: 10%;">                  
+                  {{ form.date.slice(0,10) }}
+                </td>
+                <td class="text-right" style="width: 10%;">
+                  <a class="btn btn-sm btn-icon-only text-light" >
+                    <img src="./assets/img/icons/common/view.png" [routerLink]="['/form-answers', form.formId]" (click)="formSelected(form)">
+                  </a>
+                  <a class="btn btn-sm btn-icon-only text-light" *ngIf="currentUser.name === form.userName" >
+                    <img src="./assets/img/icons/common/edit.png" [routerLink]="['/form', form.formId]" (click)="editForm(form)">
+                  </a>
+                  <a class="btn btn-sm btn-icon-only text-light" *ngIf="currentUser.role === 1" >
+                    <img src="./assets/img/icons/common/delete.png" (click)="deleteForm(form)">
+                  </a>
+                </td>
+              </tr>
+              <tr *ngIf="!completedForms || completedForms.length === 0">
+                <td colspan="5" align="center">
+                  <img src="./assets/img/icons/common/text.png">
+                </td>
+              </tr>              
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer py-4" *ngIf="completedForms && completedForms.length > 0">
+          <nav aria-label="...">
+            <div class="row align-items-center justify-content-xl-between">
+              <div class="col-md-6">
+                <div class="row">
+                  <p>Arata </p>&nbsp;&nbsp;
+                  <input type="number" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;" value="{{ pageSize }}" name="pageSize" [(ngModel)]="pageSize" (change)="pageChanged($event)">  
+                  &nbsp;&nbsp; <p>intrari </p>
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <app-pagination [page]="page" [pageSize]="pageSize"
+                  [totalItems]="totalCount" (pageChanged)="pageChanged($event)">
+                </app-pagination>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0" style="padding-bottom: 0px;">
+          <div class="row">
+            <div class="col-md-6">
+              <h3 class="mb-0" style="color: #3468EF;">Istoric note generale</h3>
+              <p style="color: #23278A">Aici poti vedea istoricul notelor generale ale beneficiarului.</p>
+            </div>
+            <div class="col-md-6" align="right">
+              <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" [routerLink]="['/note']" (click)="addNote()">
+                <img src="./assets/img/icons/common/mdi_file_copy.png" style="padding-right: 5px;" >Adauga nota
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Divider -->
+        <!--<hr class="my-0">
+        <div class="card-header border-0"> 
+          <div class="row">
+            <div class="col-md-auto">
+              <p>Cauta: </p>
+            </div>         
+            <div class="col-md-3" style="padding-left: 0px; ">            
+              <div class="form-group">                
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" style="color: #3468EF; width: 5%;">Nr.</th>
+                <th scope="col" style="color: #3468EF;">Nota</th>
+                <!-- <th scope="col" style="color: #3468EF; width: 15%;">Completat de</th> -->
+                <th scope="col" style="color: #3468EF; width: 10%;">Data</th>
+                <th scope="col" style="width: 10%;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let note of notes">
+                <td style="width: 5%;">
+                  {{ notes.indexOf(note) + 1 }}
+                </td>
+                <td>
+                  {{ note.text }}
+                </td>
+                <!-- <td style="width: 15%;">
+                  {{ note.text }}
+                </td>                 -->
+                <td style="width: 10%;">                  
+                  {{ note.lastModified.slice(0,10) }}
+                </td>
+                <td class="text-right" style="width: 10%;">
+                  <a class="btn btn-sm btn-icon-only text-light" >
+                    <img src="./assets/img/icons/common/view.png" [routerLink]="['/note', note.questionId]" (click)="noteSelected(note)">
+                  </a>                  
+                  <!-- <a class="btn btn-sm btn-icon-only text-light" *ngIf="currentUser.role === 1" >
+                    <img src="./assets/img/icons/common/delete.png" (click)="deleteNote(note)">
+                  </a> -->
+                </td>
+              </tr>
+              <tr *ngIf="!notes || notes.length === 0">
+                <td colspan="5" align="center">
+                  <img src="./assets/img/icons/common/text.png">
+                </td>
+              </tr>              
+            </tbody>
+          </table>
+        </div>
+        <!-- <div class="card-footer py-4" *ngIf="notes && notes.length > 0">
+          <nav aria-label="...">
+            <div class="row align-items-center justify-content-xl-between">
+              <div class="col-md-6">
+                <div class="row">
+                  <p>Arata </p>&nbsp;&nbsp;
+                  <input type="text" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;">  
+                  &nbsp;&nbsp; <p>intrari </p>
+                  &nbsp;&nbsp;&nbsp;&nbsp; <p>Afiseaza 1 - 10 din 68 </p>
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <ul class="pagination justify-content-end mb-0">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="javascript:void(0)" tabindex="-1">
+                      <i class="fas fa-angle-left"></i>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" href="javascript:void(0)">1</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)">2 <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)">
+                      <i class="fas fa-angle-right"></i>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

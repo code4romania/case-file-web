@@ -1,0 +1,157 @@
+<div class="header pb-5 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+ <div class="container-fluid" style="margin-top: -7.5rem !important;">   <!-- mt--7 -->
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow" style="width: 60%;">
+        <div class="card-header border-0" style="padding-bottom: 0px;">          
+            <div class="col-md-6">
+              <h3 class="mb-0" style="color: #3468EF;">{{ title }}</h3>              
+            </div>
+        </div>
+        <!-- Divider -->
+        <hr class="my-3">
+        <div class="card-body" style="padding-top: 0px;"> 
+          <form role="form" (ngSubmit)="beneficiaryInfoAdded()">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <p>Nume*</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="ex: Cristina Dobre" id="name" name="name" [(ngModel)]="beneficiary.name">                  
+                </div>
+              </div>            
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <p>Data nasterii*</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                    </div>                  
+                    <input class="form-control datepicker" placeholder="Alege o data" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
+                    name="birthDate" [(ngModel)]="dateModel" (dateSelect) = "onDateSelect($event)"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <p>Stare civila*</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <select class="form-control" name="selectedCivilStatus" [(ngModel)]="beneficiary.civilStatus">
+                    <option value="-1" selected="selected" >ex: casatorit/a</option>
+                    <option value="0">necasatorit/a</option>
+                    <option value="1">casatorit/a</option>
+                    <option value="4">concubinaj</option>
+                    <option value="2">divortat/a</option>
+                    <option value="3">vaduv/a</option>
+                  </select>
+                </div>
+              </div>            
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <p>Judet*</p>
+                </div>
+              </div>             
+              <div class="col-md-9">
+                <div class="form-group">                
+                  <select class="form-control" name="selectedCounty" (change)="changeCounty($event)" [(ngModel)]="beneficiary.countyId">
+                    <option value="undefined" selected="selected">ex: Arad</option>                  
+                    <option *ngFor="let county of countiesList" value="{{ county.countyId }}">{{ county.name }}</option>
+                  </select>
+                </div>
+              </div>            
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <p>Localitate*</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <select class="form-control" name="selectedCity" [(ngModel)]="beneficiary.cityId">
+                    <option value="undefined" selected="selected">ex: Alunis</option>
+                    <option *ngFor="let city of citiesList" value="{{ city.cityId }}">{{ city.name }}</option>
+                  </select>
+                </div>
+              </div>            
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <p>Gen*</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <select class="form-control" name="selectedGender" [(ngModel)]="beneficiary.gender">
+                    <option value="-1" selected="selected">ex: feminin</option>
+                    <option value="1">feminin</option>
+                    <option value="0">masculin</option>                 
+                  </select>
+                </div>
+              </div>            
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <p>Membru familie</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <select class="form-control" multiple name="selectedBeneficiaries" [(ngModel)]="beneficiary.familyMembersIds">
+                    <option value="undefined" selected="selected">cauta un alt beneficiar...</option>
+                    <option *ngFor="let beneficiary of beneficiariesList" value="{{ beneficiary.beneficiaryId }}">{{ beneficiary.name }}</option>
+                  </select>
+                </div>
+              </div>                         
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <p>Asistent*</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">                
+                  <select class="form-control" name="selectedUser" [(ngModel)]="beneficiary.userId">
+                    <option value="undefined" selected="selected">aloca un asistent...</option>                  
+                    <option *ngFor="let user of usersList" value="{{ user.userId }}">{{ user.name }}</option>
+                  </select>
+                </div>
+              </div>            
+            </div>
+            <div class="row">            
+              <div class="col-md-12" align="right">
+                <button type="submit" class="btn btn-primary my-4" style="background-color: #3468EF;">Continua</button>
+              </div>
+            </div> 
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

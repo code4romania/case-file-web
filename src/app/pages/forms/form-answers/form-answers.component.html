@@ -1,0 +1,83 @@
+<div class="header pb-5 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid" style="margin-top: -7.5rem !important;"> <!-- mt--7 -->
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow" style="width: 60%;">
+        <div class="card-header border-0" style="padding-bottom: 0px;">          
+            <div class="col-md-12">
+              <h3 class="mb-0" style="color: #3468EF;">{{ description }}</h3>              
+            </div>
+        </div>
+        <!-- Divider -->
+        <hr class="my-3">
+        <div class="card-body" style="padding-top: 0px;"> 
+          <!-- <form role="form" > -->
+            <div class="row" *ngFor="let question of questions">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group" style="padding-top: 3%;">
+                      <p style="font-weight: bold;">{{ question.text }}</p>
+                    </div>
+                  </div>                         
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <p *ngIf="question.answers[0].value && question.answers[0].value.length > 0;else text_content" style="color: rgba(0, 0, 0, 0.87); font-weight: bold;">{{ question.answers[0].value }}</p>
+                      <ng-template #text_content><p style="color: rgba(0, 0, 0, 0.87); font-weight: bold;">{{ question.answers[0].text }}</p></ng-template>
+                    </div>
+                  </div>                         
+                </div>
+                <div class="row" *ngIf="question.notes && question.notes.length > 0">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <p style="font-weight: bold;">Comentariile tale</p>
+                        </div>
+                      </div>                         
+                    </div>
+                    <div class="row" *ngFor="let note of question.notes">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group" *ngIf="note.attachmentPath && note.attachmentPath.length > 0" style="margin-bottom: 0px;">                              
+                              <p style="color: rgba(0, 0, 0, 0.87); font-weight: bold; margin-bottom: 5px;">{{ note.text }}</p>
+                            </div>
+                            <div class="form-group" *ngIf="!note.attachmentPath || note.attachmentPath.length <= 0">                              
+                              <p style="color: rgba(0, 0, 0, 0.87); font-weight: bold;">{{ note.text }}</p>
+                            </div>
+                          </div>                         
+                        </div>
+                        <div class="row" *ngIf="note.attachmentPath && note.attachmentPath.length > 0">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <a href="{{ note.attachmentPath }}" style="color: rgba(0, 0, 0, 0.87);"> <p> note </p></a>
+                            </div>
+                          </div>                         
+                        </div>
+                      </div>
+                    </div>
+                  </div>                         
+                </div>
+              </div>                         
+            </div>          
+            <div class="row">            
+              <div class="col-md-12" align="right">
+                <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" [routerLink]="['/beneficiary', beneficiaryId]">Inchide</button>
+              </div>
+            </div> 
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

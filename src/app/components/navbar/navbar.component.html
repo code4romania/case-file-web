@@ -1,0 +1,28 @@
+<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main" style="padding-bottom: 0px; padding-top: 10px;">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"></a>    
+    <!-- User -->
+    <ul class="navbar-nav align-items-center d-none d-md-flex">
+      <li class="nav-item" ngbDropdown placement="bottom-right">
+        
+          <div class="media align-items-center">
+            <span class="avatar avatar-sm rounded-circle">
+              <!-- alt="Image placeholder" src="assets/img/theme/team-4-800x800.jpg" -->
+              <img src="{{ userInfo.pictureUrl }}">
+            </span>
+            <div class="media-body ml-2 d-none d-lg-block">
+              <span class="mb-0 text-sm" style="color: #525f7f;">{{ userInfo.name }}</span>
+            </div>
+            <!-- Divider -->
+            <div style="border-left: 1px solid grey; height: 12px;margin-left: 10px; margin-right: 10px;"></div>
+            <div>
+              <a [routerLink]="['/login']" (click)="logout()" class="mb-0 text-sm" style="color: #525f7f;">              
+                <span>Log out</span>
+              </a>
+            </div>
+          </div>        
+      </li>
+    </ul>
+  </div>
+</nav>

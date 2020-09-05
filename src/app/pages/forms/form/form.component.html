@@ -1,0 +1,149 @@
+<div class="header pb-5 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid" style="margin-top: -7.5rem !important;"> <!-- mt--7 -->
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow" style="width: 60%;">
+        <div class="card-header border-0" style="padding-bottom: 0px;">          
+            <div class="col-md-12">
+              <h3 class="mb-0" style="color: #3468EF;">{{ description }}</h3>              
+            </div>            
+        </div>
+        <!-- Divider -->
+        <hr class="my-3">
+        <div class="card-body"> 
+          <form role="form" (ngSubmit)="saveForm()">            
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <p style="font-weight: bold;">Data completarii*</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                    </div>                  
+                    <input class="form-control datepicker" placeholder="Alege o data" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
+                    name="dp" [(ngModel)]="dateModel" (dateSelect) = "onDateSelect($event)" />                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12" *ngFor="let section of sections">
+                <div class="form-group">
+                  <p style="font-weight: bold; font-size: larger;">{{ section.description }}</p>
+                </div>
+                
+                <div class="row" *ngFor="let question of section.questions">
+                  <div class="col-md-12">
+                    <p style="font-weight: bold;">{{ question.text }}</p>
+
+                    <div class="row" *ngIf="question.questionType === 4 || question.questionType === 5" style="padding-bottom: 2%;">
+                      <div class="col-md-12">
+                        <input type="text" class="form-control" name="{{question.questionId}}" [(ngModel)]="question.optionsToQuestions[0].text" />
+                      </div>
+                    </div>
+
+                    <div class="row" *ngIf="question.questionType === 6" style="padding-bottom: 2%;">
+                      <div class="col-md-12">
+                        <div class="input-group input-group-alternative">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                          </div>                  
+                          <input class="form-control datepicker" placeholder="Alege o data" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
+                          name="dp" (dateSelect) = "onQDateSelect($event, question)" [(ngModel)]="question.optionsToQuestions[0].text" />                    
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row" *ngIf="question.questionType === 1" style="padding-bottom: 2%;">
+                      <div class="col-md-12">
+                        <div class="btn-group-toggle">
+                          <label class="btn btn-secondary btn-lg btn-block" style="box-shadow: none"
+                          *ngFor="let option of question.optionsToQuestions"
+                          [ngClass]="{ active: option.isSelected }"
+                          >
+                            <input type="radio" id="name{{ option.idOption }}" name="name{{ question.questionId }}" 
+                            value="{{ option.text }}" (change)="selectOption(question, option, $event)" >{{ option.text }}
+                          </label>
+                        </div>                    
+                      </div>
+                    </div>
+
+                    <div class="row" *ngIf="question.questionType === 0" style="padding-bottom: 2%;">
+                      <div class="col-md-12">
+                        <div class="btn-group-toggle">
+                          <label class="btn btn-secondary btn-lg btn-block" style="box-shadow: none"
+                          *ngFor="let option of question.optionsToQuestions"                          
+                          [ngClass]="{ active: option.isSelected }"
+                          >
+                            <input type="checkbox" name="name{{ option.idOption }}" [(ngModel)]="option.isSelected" >{{ option.text }}
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row" align="right">
+                      <div class="col-md-12">
+                        <a [routerLink]="" (click)="showNoteSection(question)" *ngIf="!question.showNoteSection" style="color: black;">Adauga o nota</a>
+                      </div>
+                    </div>
+                    <div class="row" align="right" *ngIf="question.showNoteSection">
+                      <div class="col-md-2"></div>
+                      <div class="col-md-10">                        
+                        <div class="row">
+                          <div align="left" class="col">
+                            <p style="font-weight: bold;">Comentariile tale</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <textarea class="form-control" name="note{{question.questionId}}" [(ngModel)]="question.notes[0].text" ></textarea>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div align="left" style="padding-top: 2%;" class="col">
+                            <p style="font-weight: bold;">Incarca o fotografie / un video sau un fisier</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col" align="left">
+                            <input type="file" name="notefile{{question.questionId}}"  (change)="onFileChange($event, question)" />
+                          </div>
+                        </div>
+                        <div class="row" style="padding-bottom: 3%;">
+                          <div class="col" align="right">
+                            <a style="color: black;" [routerLink]="" (click)="hideNoteSection(question)" >Anuleaza</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>             
+
+                </div>
+
+              </div>
+            </div>
+              
+                                               
+            <div class="row">            
+              <div class="col-md-12" align="right">
+                <button type="submit" class="btn btn-primary my-4" style="background-color: #3468EF;">Salveaza chestionar</button>
+              </div>
+            </div> 
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

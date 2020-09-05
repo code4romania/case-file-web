@@ -1,0 +1,66 @@
+<div class="header bg-gradient-primary py-lg-7">
+  <div class="container">
+    <div class="header-body text-center mb-7">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">Bine ai venit!</h1>
+          <!-- <p class="text-lead text-light">Use these awesome forms to login or create new account in your project for free.</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</div>
+<!-- Page content  mt--9 -->
+<div class="container mt--9 pb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+      <div class="card bg-secondary shadow border-0">        
+        <div class="card-body px-lg-5 py-lg-5">
+          <div class="text-center text-muted mb-4">
+            <small>Intra in cont</small>
+          </div>          
+          <form role="form" (ngSubmit)="tryLogin()">
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                </div>
+                <input class="form-control" placeholder="Email" type="email" id="email" name="email" [(ngModel)]="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <input class="form-control" placeholder="Parola" type="password" id="password" name="password" [(ngModel)]="password">
+              </div>
+            </div>
+            <div class="custom-control custom-control-alternative custom-checkbox">
+              <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
+              <label class="custom-control-label" for=" customCheckLogin">
+                <span class="text-muted">Tine-ma minte</span>
+              </label>
+            </div>
+            <p *ngIf="invalid" style="color:red">
+              Credentials are invalid
+            </p>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary my-4">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-6">
+          <a href="javascript:void(0)" class="text-light" (click) = "forgotPwd()"><small>Ai uitat parola?</small></a>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
