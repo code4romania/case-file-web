@@ -20,135 +20,13 @@
         <hr class="my-3">
         <div class="card-body" style="padding-top: 2%; padding-bottom: 0px;"> 
           <ng-template #section>
-          </ng-template>
-            <!-- <div class="row" *ngIf="showSection">
-              <div class="col-md-3">
-                <div class="form-group">
-                  <p>Titlu sectiune*</p>
-                </div>
-              </div>
-              <div class="col-md-9">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="ex: Evaluarea personalitatii copilului..." id="title" name="title" [(ngModel)]="form.formSections[form.formSections.length - 1].title">                  
-                </div>
-              </div>            
-            </div> -->
-            <!-- <div class="row" *ngIf="showSection">
-              <div class="col-md-3">
-                <div class="form-group">
-                  <p>Descriere sectiune</p>
-                </div>
-              </div>
-              <div class="col-md-9">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="ex: pentru fiecare arie se vor mentiona obligatoriu..." id="description" name="description" [(ngModel)]="form.formSections[form.formSections.length - 1].description">                  
-                </div>
-              </div>            
-            </div> -->
-
-            <!-- <div class="row" *ngIf="showQuestion">
-              <div class="col-md-12">
-                <div class="card shadow">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <p>Titlu intrebare*</p>
-                        </div>
-                      </div>
-                      <div class="col-md-9">
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="ex: Dezvoltarea senzoriala" id="text" name="text" [(ngModel)]="currentQuestion.text">                  
-                        </div>
-                      </div>            
-                    </div>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <p>Text suport</p>
-                        </div>
-                      </div>
-                      <div class="col-md-9">
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="ex: integritatea sau afectarea senzoriala (descriere)" id="hint" name="hint" [(ngModel)]="currentQuestion.hint">                  
-                        </div>
-                      </div>            
-                    </div>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <p>Tip camp*</p>
-                        </div>
-                      </div>
-                      <div class="col-md-9">
-                        <div class="form-group">
-                          <select class="form-control" name="selectedQuestionType" [(ngModel)]="currentQuestion.questionType" (change)="questionTypeChange($event, currentQuestion)">                            
-                            <option value="4" selected="selected">Text</option>
-                            <option value="5">Numar</option>
-                            <option value="6">Data</option>
-                            <option value="1">Selectie simpla</option>
-                            <option value="0">Selectie multipla</option>
-                          </select>                 
-                        </div>
-                      </div>            
-                    </div>
-                    <div class="row" *ngIf="!showOptions">
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <p>Nr. caractere</p>
-                        </div>
-                      </div>
-                      <div class="col-md-9">
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="ex: 300" id="fieldLength" name="fieldLength" [(ngModel)]="currentQuestion.charsNo">                  
-                        </div>
-                      </div>            
-                    </div>
-                    <div class="row"  *ngIf="showOptions">
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <p>Option text</p>
-                        </div>
-                      </div>
-                      <div class="col-md-9">
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="" id="option0" name="option0" [(ngModel)]="currentQuestion.optionsToQuestions[0].text"> 
-                          <br/>
-                          <input type="text" class="form-control" placeholder="" id="option1" name="option1" [(ngModel)]="currentQuestion.optionsToQuestions[1].text">                 
-                        </div>  
-                      </div>
-                      <div class="col-md-12" align="right">
-                        <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;">Adauga optiune</button>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <p>Obligatoriu</p>
-                        </div>
-                      </div>
-                      <div class="col-md-9">
-                        <div class="form-group">
-                          <input type="checkbox" name="isMandatory" [(ngModel)]="currentQuestion.isMandatory">                  
-                        </div>
-                      </div>            
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-
-            <!-- <div class="row" *ngIf="showSection">            
-              <div class="col-md-12" align="middle">
-                <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" (click)="addQuestion(form.formSections[form.formSections.length - 1])">Adauga o intrebare in sectiune</button>
-              </div>
+          </ng-template>            
+           
+          <div class="row">            
+            <div class="col-md-12" align="right">
+              <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" (click)="addFormSection()">Adauga o sectiune de formular</button>
             </div>
-            <hr class="my-0" *ngIf="showSection"> -->
-            <div class="row">            
-              <div class="col-md-12" align="right">
-                <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" (click)="addFormSection()">Adauga o sectiune de formular</button>
-              </div>
-            </div> 
+          </div> 
           
         </div>
       </div>
@@ -197,7 +75,8 @@
             </div>            
             <div class="row">            
               <div class="col-md-12" align="right">
-                <button type="submit" class="btn btn-primary my-4" style="background-color: #3468EF;">Publica formular</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary my-4" style="background-color: #3468EF;">Salveaza draft</button>
+                <button type="submit" id="publishBtn" class="btn btn-primary my-4" style="background-color: #3468EF;">Publica formular</button>
               </div>
             </div>
         </div>

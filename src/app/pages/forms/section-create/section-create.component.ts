@@ -38,74 +38,51 @@ export class SectionCreateComponent implements OnInit {
     this.form.formSections.push(new FormSection());
     this.currentSection = this.form.formSections[this.form.formSections.length - 1];
     this.loadSectionComponent(this.currentSection);
-  }
-
-  // addQuestion(section: FormSection)
-  // {
-  //   this.showQuestion = true;
-  //   if(!section.questions)
-  //     section.questions = [];
-  //   section.questions.push(new FormQuestion());
-  //   this.currentQuestion = section.questions[section.questions.length - 1];
-  //   this.currentQuestion.questionType = 4;
-  // }
-
-  // questionTypeChange(event, currentQuestion: FormQuestion)
-  // {    
-  //   console.log(event.target.value);
-  //   let questionType = +event.target.value; 
-      
-  //   console.log("currentQuestion: ");
-  //   console.log(currentQuestion);
-
-  //   console.log("selected questionType: ");
-  //   console.log(questionType);
-
-  //   if (questionType === 0 || questionType === 1) {
-  //     if(!currentQuestion.optionsToQuestions)
-  //       currentQuestion.optionsToQuestions = [];
-
-  //     currentQuestion.optionsToQuestions.push(new BaseAnswer());
-  //     currentQuestion.optionsToQuestions.push(new BaseAnswer());
-
-  //     this.showOptions = true;
-  //   }
-  //   else {
-  //     this.showOptions = false;
-  //   }
-  // }
+  }  
 
   saveForm()
   {
+    if(this.form.formSections == undefined || this.form.formSections.length <= 0) {
+      alert("Formularul trebuie sa contina cel putin o sectiune.");
+      return;
+    }
+
     this.form.formSections.forEach(section  => {
+      if (section.questions != undefined && section.questions.length > 0) {
 
-      section.questions.forEach(question => {
-        question.questionType = +question.questionType;
-        question.charsNo = +question.charsNo;
-        if (question.questionType === 4 || question.questionType === 5 || question.questionType === 6) {
-          question.optionsToQuestions = [];
-          var option = new BaseAnswer();
-          option.text = "";
-          option.isFreeText = true;
-          question.optionsToQuestions.push(option);          
-        }
-        else if (question.questionType === 1) { // single selection
+        section.questions.forEach(question => {
+          question.questionType = +question.questionType;
+          question.charsNo = +question.charsNo;
+          if (question.questionType === 4 || question.questionType === 5 || question.questionType === 6) {
+            question.optionsToQuestions = [];
+            var option = new BaseAnswer();
+            option.text = "";
+            option.isFreeText = true;
+            question.optionsToQuestions.push(option);          
+          }          
 
-        }
-        else if (question.questionType === 0) { // multiple selection
-
-        }
-
-      });
-
+        });
+      }
     });
     console.log("form to save: ");
     console.log(this.form);
 
-    this.formsService.saveForm(this.form).subscribe((result)=>{
-      console.log(result);
-      this.router.navigate(['/forms']);
-    });
+    var activeButton = document.activeElement.id;
+    console.log("activeButton");
+    console.log(activeButton);
+
+    if (activeButton == "saveBtn") {
+      this.formsService.saveForm(this.form).subscribe((result)=>{
+        console.log(result);
+        this.router.navigate(['/forms']);
+      });
+    }
+    if (activeButton == "publishBtn") {
+      this.formsService.saveAndPublishForm(this.form).subscribe((result)=>{
+        console.log(result);
+        this.router.navigate(['/forms']);
+      });
+    }    
   }
 
   async loadSectionComponent(section: FormSection) {

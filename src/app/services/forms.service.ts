@@ -72,4 +72,9 @@ export class FormsService {
     const url: string = Location.joinWithSlash(this.baseUrl, `/api/v1/form`);
     return this.http.post(url, form);
   }
+
+  public saveAndPublishForm(form: Form) {
+    const url: string = Location.joinWithSlash(this.baseUrl, `/api/v1/form/publish`);
+    return this.http.post(url, form);
+  }
 }
