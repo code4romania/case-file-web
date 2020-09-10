@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Beneficiary } from 'src/app/models/beneficiary.model';
 import { BeneficiariesService } from 'src/app/services/beneficiaries.service';
 import { formatDate } from '@angular/common';
@@ -29,11 +29,15 @@ export class BeneficiaryComponent implements OnInit {
   allocatedFormsTotalCount = 0;
   allocatedForms: FormDetails[];
 
-  constructor(private route: ActivatedRoute, private beneficiariesService: BeneficiariesService, private formsService: FormsService, private usersService: UsersService) {
+  constructor(private route: ActivatedRoute, private beneficiariesService: BeneficiariesService, private formsService: FormsService, private usersService: UsersService, private router: Router) {
     
    }
 
-  ngOnInit() {    
+  ngOnInit() {
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }
+    
     this.sub = this.route.params.subscribe(params => {
       this.beneficiaryId = params['beneficiaryId'];
       });

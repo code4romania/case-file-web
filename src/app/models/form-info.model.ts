@@ -12,4 +12,5 @@ export class FormDetails {
     selected: boolean;
     userName: string;
     date: string;
+    canBeModified: boolean;
 }

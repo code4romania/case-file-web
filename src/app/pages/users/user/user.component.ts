@@ -17,7 +17,10 @@ export class UserComponent implements OnInit {
 
   constructor(private usersService: UsersService, private router: Router) { }
 
-  ngOnInit() {    
+  ngOnInit() {
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }    
     
     if(this.usersService.user)
     {

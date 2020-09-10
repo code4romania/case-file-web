@@ -20,6 +20,9 @@ export class BeneficiarsComponent implements OnInit {
   constructor(private beneficiariesService: BeneficiariesService, private router: Router, private usersService: UsersService) { }
 
   ngOnInit() {
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }
     // this.currentUser = this.usersService.currentUser;
     this.loadBeneficiaries(1, this.pageSize);
   }
@@ -69,8 +72,7 @@ export class BeneficiarsComponent implements OnInit {
       this.beneficiariesService.deleteBeneficiary(beneficiary.beneficiaryId.toString()).subscribe((result)=>{
         if (result === true)
         {
-          this.beneficiariesList = this.beneficiariesList.filter(ben => ben.beneficiaryId !== beneficiary.beneficiaryId);
-          this.totalCount = this.beneficiariesList.length;
+          this.loadBeneficiaries(this.page, this.pageSize);
         }
         
       });

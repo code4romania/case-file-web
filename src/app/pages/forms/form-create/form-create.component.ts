@@ -15,9 +15,12 @@ export class FormCreateComponent implements OnInit {
   title: string;
   form: Form;
 
-  constructor(private formsService: FormsService, private router: Router) { }
+  constructor(private formsService: FormsService, private router: Router, private usersService: UsersService) { }
 
-  ngOnInit() {    
+  ngOnInit() { 
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }   
     
     // if(this.formsService.form)
     // {

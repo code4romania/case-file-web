@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormDetails } from 'src/app/models/form-info.model';
 import { FormsService } from 'src/app/services/forms.service';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-forms',
@@ -14,9 +15,13 @@ export class FormsComponent implements OnInit {
   totalCount = 0;
   page = 1;
 
-  constructor(private formsService: FormsService, private router: Router) { }
+  constructor(private formsService: FormsService, private router: Router, private usersService: UsersService) { }
 
   ngOnInit() {
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }
+
     this.loadForms(1, this.pageSize);
   }
 
@@ -51,6 +56,18 @@ export class FormsComponent implements OnInit {
 
   public async addForm(): Promise<void> {         
     this.formsService.selectedForm = null;
+  }
+
+  public async deleteForm(form: FormDetails): Promise<void> {    
+    if(confirm("Esti sigur ca vrei sa stergi acest formular?")) {
+      this.formsService.deleteForm(form.id.toString()).subscribe((result)=>{
+        if (result === true)
+        {
+          this.loadForms(this.page, this.pageSize);
+        }
+        
+      });
+    }
   }
 
 }

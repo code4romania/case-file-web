@@ -3,6 +3,7 @@ import { FormInfo, FormDetails } from 'src/app/models/form-info.model';
 import { FormsService } from 'src/app/services/forms.service';
 import { BeneficiariesService } from 'src/app/services/beneficiaries.service';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-forms-selection',
@@ -16,9 +17,13 @@ export class FormsSelectionComponent implements OnInit {
   totalCount = 0;
   page = 1;
   
-  constructor(private formsService: FormsService, private beneficiariesService: BeneficiariesService, private router: Router) { }
+  constructor(private formsService: FormsService, private beneficiariesService: BeneficiariesService, private router: Router, private usersService: UsersService) { }
 
   ngOnInit() {
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }
+
     this.loadForms(1, this.pageSize);    
   }
 

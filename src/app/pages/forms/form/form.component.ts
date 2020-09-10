@@ -10,6 +10,7 @@ import { AnswerWrapper, BulkAnswer, SelectedOption } from 'src/app/models/answer
 import { FormQuestion } from 'src/app/models/form-question.model';
 import { Note, NoteDto } from 'src/app/models/note.model';
 import { BaseAnswer } from 'src/app/models/base-answer.model';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-form',
@@ -23,11 +24,15 @@ export class FormComponent implements OnInit {
   dateModel: NgbDateStruct;
   showSection: boolean;  
   formDate: Date;
-  notes: Note[]; // ????
+  notes: Note[];
 
-  constructor(private formsService: FormsService,private beneficiariesService: BeneficiariesService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private formsService: FormsService,private beneficiariesService: BeneficiariesService, private route: ActivatedRoute, private router: Router, private usersService: UsersService) { }
 
-  ngOnInit() { 
+  ngOnInit() {
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }
+
     this.route.params.subscribe(params => {
       this.formId = params['formId'];
       });

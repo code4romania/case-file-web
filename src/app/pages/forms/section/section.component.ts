@@ -15,9 +15,6 @@ import { QuestionComponent } from '../question/question.component';
     @Input()
     section: FormSection;
     
-    // @Output() 
-    // change: EventEmitter<any> = new EventEmitter();
-
     currentQuestion: FormQuestion;
 
     constructor(private cfr: ComponentFactoryResolver) { }

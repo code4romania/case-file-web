@@ -15,6 +15,10 @@ export class AssistantSelectionComponent implements OnInit {
   constructor(private usersService: UsersService, private beneficiariesService: BeneficiariesService, private router: Router) { }
 
   ngOnInit() {
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }
+
     this.loadUsers();
   }
 

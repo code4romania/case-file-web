@@ -32,7 +32,9 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <p *ngIf="question.answers[0].value && question.answers[0].value.length > 0;else text_content" style="color: rgba(0, 0, 0, 0.87); font-weight: bold;">{{ question.answers[0].value }}</p>
-                      <ng-template #text_content><p style="color: rgba(0, 0, 0, 0.87); font-weight: bold;">{{ question.answers[0].text }}</p></ng-template>
+                      <ng-template #text_content>                        
+                        <p *ngFor="let answer of question.answers" style="color: rgba(0, 0, 0, 0.87); font-weight: bold;">{{ answer.text }}</p>
+                      </ng-template>
                     </div>
                   </div>                         
                 </div>

@@ -29,6 +29,10 @@ export class BeneficiaryInfoComponent implements OnInit {
   constructor(private beneficiariesService: BeneficiariesService, private usersService: UsersService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }
+
     this.loadCounties();
     this.loadBeneficiaries();
     this.loadUsers();

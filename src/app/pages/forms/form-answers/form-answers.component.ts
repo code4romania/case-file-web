@@ -18,9 +18,13 @@ export class FormAnswersComponent implements OnInit {
   notes: Note[];
   formId: number;
 
-  constructor(private route: ActivatedRoute, private formsService: FormsService, private beneficiariesService: BeneficiariesService, private router: Router) { }
+  constructor(private formsService: FormsService, private beneficiariesService: BeneficiariesService, private router: Router, private usersService: UsersService) { }
 
-  ngOnInit() {    
+  ngOnInit() {
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }
+
     this.description = this.formsService.selectedForm.description;
     this.loadAnswers();
   }

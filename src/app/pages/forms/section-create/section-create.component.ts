@@ -6,6 +6,7 @@ import { FormSection } from 'src/app/models/form-section.model';
 import { FormQuestion } from 'src/app/models/form-question.model';
 import { BaseAnswer } from 'src/app/models/base-answer.model';
 import { SectionComponent } from '../section/section.component';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-section-create',
@@ -21,9 +22,12 @@ export class SectionCreateComponent implements OnInit {
   showOptions: boolean;
   @ViewChild('section', {read: ViewContainerRef}) section: ViewContainerRef;
 
-  constructor(private formsService: FormsService, private router: Router, private cfr: ComponentFactoryResolver) { }
+  constructor(private formsService: FormsService, private router: Router, private cfr: ComponentFactoryResolver, private usersService: UsersService) { }
 
   ngOnInit() {
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }
     
     this.form = this.formsService.form;
     

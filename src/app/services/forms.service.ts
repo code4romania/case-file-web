@@ -77,4 +77,9 @@ export class FormsService {
     const url: string = Location.joinWithSlash(this.baseUrl, `/api/v1/form/publish`);
     return this.http.post(url, form);
   }
+
+  public deleteForm(formId: string) {
+    const url: string = Location.joinWithSlash(this.baseUrl, `/api/v1/form?formId=${formId}`);
+    return this.http.delete(url);
+  }
 }

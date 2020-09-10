@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { BeneficiaryInfo } from 'src/app/models/beneficiary-info.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import { BeneficiariesService } from 'src/app/services/beneficiaries.service';
 import { formatDate } from '@angular/common';
@@ -21,11 +21,14 @@ export class UserProfileComponent implements OnInit {
   pageSize = 10;
   totalCount = 0;
 
-  constructor(private route: ActivatedRoute, private usersService: UsersService, private beneficiariesService: BeneficiariesService) {
-    
-   }
+  constructor(private route: ActivatedRoute, private usersService: UsersService, private beneficiariesService: BeneficiariesService, private router: Router) {    
+  }
 
-  ngOnInit() {    
+  ngOnInit() {
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }
+    
     this.sub = this.route.params.subscribe(params => {
       this.userId = params['userId'];
       });

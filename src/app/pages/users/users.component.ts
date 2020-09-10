@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { UserInfo } from 'src/app/models/user-info.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tables',
@@ -14,9 +15,13 @@ export class UsersComponent implements OnInit {
   currentUser: UserInfo;
   page = 1;
   
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService, private router: Router) { }
 
   ngOnInit() {
+    if (!this.usersService.verified2FA) {
+      this.router.navigateByUrl('/login');
+    }
+
     // this.currentUser = this.usersService.currentUser;
     this.loadUsers(1, this.pageSize);
   }
@@ -64,8 +69,7 @@ export class UsersComponent implements OnInit {
       this.usersService.deleteUser(user.userId.toString()).subscribe((result)=>{
         if (result === true)
         {
-          this.usersList = this.usersList.filter(u => u.userId !== user.userId);
-          this.totalCount = this.usersList.length;
+          this.loadUsers(this.page, this.pageSize);
         }
         
       });
