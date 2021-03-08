@@ -13,4 +13,5 @@ export class FormDetails {
     userName: string;
     date: string;
     canBeModified: boolean;
+    type: number;
 }

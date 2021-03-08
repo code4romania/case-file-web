@@ -14,7 +14,7 @@ export class TwoFAComponent implements OnInit {
   constructor(private usersService: UsersService, private tokenService: TokenService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    
+     
   }
 
   verify() {
@@ -23,11 +23,17 @@ export class TwoFAComponent implements OnInit {
     }
     else {      
       this.usersService.verifyToken2FA(this.token).subscribe((result)=>{
-        console.log("verifyToken2FA result: ")
-        console.log(result);
-        if (result.succeeded) {
+        //console.log("verifyToken2FA result: ")
+        //console.log(result);
+        if (result.access_token != undefined) {
           this.usersService.verified2FA = true;
-          this.router.navigate(['/dashboard']);  
+          this.tokenService.token = result.access_token;
+
+          this.usersService.loadCurrentUserInfo().subscribe(result => 
+          { 
+            this.usersService.currentUser = result;
+            this.router.navigate(['/dashboard']);
+          });            
         } 
         else {
           this.tokenService.token = undefined;
@@ -40,8 +46,8 @@ export class TwoFAComponent implements OnInit {
 
   resend() {
     this.usersService.resendToken2FA().subscribe((result)=>{
-      console.log("resendToken2FA result: ")
-      console.log(result);
+      //console.log("resendToken2FA result: ")
+      //console.log(result);
       alert(result.message);
     });
   }

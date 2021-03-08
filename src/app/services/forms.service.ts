@@ -1,4 +1,4 @@
-import { ApiService } from "../core/apiService/api.service";
+import { ApiService, HttpOptions } from "../core/apiService/api.service";
 import { environment } from "src/environments/environment";
 import { Injectable } from "@angular/core";
 import { FormInfo, FormDetails } from "../models/form-info.model";
@@ -17,7 +17,7 @@ export class FormsService {
   selectedForm: FormDetails;
   form: Form;
   continueEditing: boolean;
-
+  
   constructor(private http: ApiService) {
     this.baseUrl = environment.apiUrl;
   }
@@ -66,6 +66,10 @@ export class FormsService {
 
     const url: string = Location.joinWithSlash(this.baseUrl, `/api/v2/note/upload`);    
     return this.http.post<any>(url, formData);
+  }
+
+  public loadNotePhoto(url: string) {
+    return this.http.get<Blob>(url, {responseType: 'blob' as 'json'}).pipe();
   }
 
   public saveForm(form: Form) {

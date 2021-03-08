@@ -22,14 +22,14 @@ import { OptionComponent } from '../option/option.component';
 
     questionTypeChange(event, currentQuestion: FormQuestion)
     {    
-      console.log(event.target.value);
+      //console.log(event.target.value);
       let questionType = +event.target.value; 
         
-      console.log("currentQuestion: ");
-      console.log(currentQuestion);
+      //console.log("currentQuestion: ");
+      //console.log(currentQuestion);
 
-      console.log("selected questionType: ");
-      console.log(questionType);
+      //console.log("selected questionType: ");
+      //console.log(questionType);
 
       if (questionType === 0 || questionType === 1) {
         if(!currentQuestion.optionsToQuestions) {
@@ -47,7 +47,7 @@ import { OptionComponent } from '../option/option.component';
     }
 
     addOption() {
-      console.log(this.currentQuestion);
+      //console.log(this.currentQuestion);
 
       if(!this.currentQuestion.optionsToQuestions)
         this.currentQuestion.optionsToQuestions = [];

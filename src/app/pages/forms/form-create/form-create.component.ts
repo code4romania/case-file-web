@@ -28,7 +28,7 @@ export class FormCreateComponent implements OnInit {
 
     // }
     // else {
-      this.title = "Adauga formular nou";
+      this.title = "Adaugă formular nou";
       this.form = new Form();
       this.form.description = "";
       this.form.type = -1;
@@ -38,7 +38,7 @@ export class FormCreateComponent implements OnInit {
   public async openSectionPage(): Promise<void> {
     this.form.type = +this.form.type;         
     this.formsService.form = this.form;
-    console.log(this.formsService.form);
+    //console.log(this.formsService.form);
   }
 
 }

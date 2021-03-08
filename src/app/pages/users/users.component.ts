@@ -4,7 +4,7 @@ import { UserInfo } from 'src/app/models/user-info.model';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-tables',
+  selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
@@ -48,7 +48,7 @@ export class UsersComponent implements OnInit {
   }
 
   public async userSelected(user: UserInfo): Promise<void> {    
-    console.log(user);    
+    //console.log(user);    
     this.usersService.selectedUser = user;
   }
 
@@ -66,7 +66,7 @@ export class UsersComponent implements OnInit {
 
   public async deleteUser(user: UserInfo): Promise<void> {    
     if(confirm("Esti sigur ca vrei sa dezactivezi contul utilizatorului " + user.name + "?")) {
-      this.usersService.deleteUser(user.userId.toString()).subscribe((result)=>{
+      this.usersService.deleteUser(user.userId).subscribe((result)=>{
         if (result === true)
         {
           this.loadUsers(this.page, this.pageSize);

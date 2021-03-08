@@ -1,0 +1,173 @@
+<div class="container-fluid" style="margin-top: 1.5%;"> <!-- mt--7 -->
+  <!-- Table -->
+  <div class="row" style="padding-bottom: 3%;">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0" style="padding-bottom: 0px;padding-top: 0px;">
+          <div class="row">
+            <div class="col-md-8" style="padding-top: 20px;">
+              <h3 class="mb-0" style="color: #01A4AE;">Lista solicitări</h3>
+              <p style="color: #23278A">Vezi aici toate cererile de creare de cont.</p>
+            </div>            
+          </div>
+        </div>
+        <!-- Divider -->
+        <!-- <hr class="my-0">
+        <div class="card-header border-0"> 
+          <div class="row">
+            <div class="col-md-auto">
+              <p>Cauta: </p>
+            </div>         
+            <div class="col-md-3" style="padding-left: 0px; ">            
+              <div class="form-group" style="margin-bottom: 0px; ">                
+                <input type="text" class="form-control" (keydown.enter)="search($event.target.value)">
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush" style="table-layout: fixed; width: 100%">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" style="color: #01A4AE;width: 3%;">Nr.</th>
+                <th scope="col" style="color: #01A4AE;">Nume și prenume</th>
+                <th scope="col" style="color: #01A4AE;">Organizație</th>
+                <th scope="col" style="color: #01A4AE;">Email</th>
+                <th scope="col" style="color: #01A4AE;width: 10%;">Telefon</th>
+                <th scope="col" style="color: #01A4AE;">Mesaj</th>
+                <th scope="col" style="color: #01A4AE;width: 12%;">Data înregistrării</th>
+                <th scope="col" style="color: #01A4AE;text-align: center;">Acțiuni</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let request of pendingNgoRequests">
+                <td style="width: 3%;">
+                  {{ (page - 1) * pageSize + pendingNgoRequests.indexOf(request) + 1 }}
+                </td>
+                <td>
+                  {{ request.contactPerson }}
+                </td>
+                <td style="word-wrap: break-word; white-space: normal; width: 25%;">
+                  {{ request.ngoName }}
+                </td> 
+                <td style="word-wrap: break-word; white-space: normal;">
+                  {{ request.email }}
+                </td>
+                <td>
+                  {{ request.phone }}
+                </td>
+                <td style="word-wrap: break-word; white-space: normal;">
+                  {{ request.message }}
+                </td>
+                <td>
+                  {{ request.requestDate }}
+                </td>                               
+                <td class="text-right">
+                  <button type="button" class="btn btn-primary" (click)="approveNgoRequest(request)">Aprobă</button>
+                <br/>                  
+                  <button type="button" class="btn btn-primary" style="margin-top: 1.5rem !important; background-color: #ED8C8C; border-color: #ED8C8C;" (click)="rejectNgoRequest(request)">Respinge</button>                 
+                </td>
+              </tr>              
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer py-4">
+          <nav aria-label="...">
+            <div class="row align-items-center justify-content-xl-between">
+              <div class="col-md-6">
+                <div class="row">
+                  <p>Arată </p>&nbsp;&nbsp;
+                  <input type="number" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;" value="{{ pageSize }}" name="pageSize" (change)="pageChanged($event)">  
+                  &nbsp;&nbsp; <p>intrări </p>                  
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <app-pagination [page]="page" [pageSize]="pageSize"
+                  [totalItems]="totalCount" (pageChanged)="pageChanged($event)">
+                </app-pagination>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0" style="padding-bottom: 0px;padding-top: 0px;">
+          <div class="row">
+            <div class="col-md-8" style="padding-top: 20px;">
+              <h3 class="mb-0" style="color: #01A4AE;">Organizații</h3>
+              <p style="color: #23278A">Vezi aici toate organizațiile.</p>
+            </div>            
+          </div>
+        </div>        
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush" style="width: 100%">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" style="color: #01A4AE;width: 3%;">Nr.</th>
+                <th scope="col" style="color: #01A4AE;">Nume și prenume</th>
+                <th scope="col" style="color: #01A4AE;">Organizație</th>
+                <th scope="col" style="color: #01A4AE;">Email</th>
+                <th scope="col" style="color: #01A4AE;width: 10%;">Telefon</th>
+                <th scope="col" style="color: #01A4AE;">Mesaj</th>
+                <th scope="col" style="color: #01A4AE;width: 12%;">Data înregistrării</th>
+                <th scope="col" style="color: #01A4AE;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let request of ruledNgoRequests">
+                <td style="width: 3%;">
+                  {{ (page - 1) * ruledPageSize + ruledNgoRequests.indexOf(request) + 1 }}
+                </td>
+                <td>
+                  {{ request.contactPerson }}
+                </td>
+                <td style="word-wrap: break-word; white-space: normal; width: 25%;">
+                  {{ request.ngoName }}
+                </td> 
+                <td style="word-wrap: break-word; white-space: normal;">
+                  {{ request.email }}
+                </td>
+                <td>
+                  {{ request.phone }}
+                </td>
+                <td style="word-wrap: break-word; white-space: normal;">
+                  {{ request.message }}
+                </td>
+                <td>
+                  {{ request.statusUpdateDate }}
+                </td>                
+                <td class="text-right" style="width: 4%;">
+                  <label *ngIf="request.requestStatus===1"><b>APROBAT</b></label>
+                  <label *ngIf="request.requestStatus===2"><b>RESPINS</b></label>                 
+                </td>
+              </tr>              
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer py-4">
+          <nav aria-label="...">
+            <div class="row align-items-center justify-content-xl-between">
+              <div class="col-md-6">
+                <div class="row">
+                  <p>Arată </p>&nbsp;&nbsp;
+                  <input type="number" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;" value="{{ ruledPageSize }}" name="ruledPageSize" (change)="ruledPageChanged($event)">  
+                  &nbsp;&nbsp; <p>intrări </p>                  
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <app-pagination [page]="ruledPage" [pageSize]="ruledPageSize"
+                  [totalItems]="ruledTotalCount" (pageChanged)="ruledPageChanged($event)">
+                </app-pagination>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

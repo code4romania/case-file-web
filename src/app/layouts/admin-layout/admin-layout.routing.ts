@@ -16,6 +16,8 @@ import { FormComponent } from 'src/app/pages/forms/form/form.component';
 import { FormAnswersComponent } from 'src/app/pages/forms/form-answers/form-answers.component';
 import { FormCreateComponent } from 'src/app/pages/forms/form-create/form-create.component';
 import { SectionCreateComponent } from 'src/app/pages/forms/section-create/section-create.component';
+import { NgoComponent } from 'src/app/pages/ngo/ngo.component';
+import { ReportComponent } from 'src/app/pages/statistics/report/report.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: BeneficiarsComponent },
@@ -26,12 +28,18 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'statistics',   component: StatisticsComponent },
     { path: 'settings',   component: SettingsComponent },
     { path: 'beneficiary-info',    component: BeneficiaryInfoComponent },
+    { path: 'beneficiary-info/:beneficiaryId',    component: BeneficiaryInfoComponent },
     { path: 'forms-selection',   component: FormsSelectionComponent },
     { path: 'assistant-selection',   component: AssistantSelectionComponent },
     { path: 'beneficiary/:beneficiaryId',    component: BeneficiaryComponent },
     { path: 'user',    component: UserComponent },
+    { path: 'user/:userId',    component: UserComponent },
     { path: 'form/:formId',    component: FormComponent },
+    { path: 'form/:formId/:viewForm',    component: FormComponent },
     { path: 'form-answers/:formId',    component: FormAnswersComponent },
     { path: 'form-create',   component: FormCreateComponent },
-    { path: 'section-create',   component: SectionCreateComponent }
+    { path: 'section-create',   component: SectionCreateComponent },
+    { path: 'ngo',   component: NgoComponent },
+    { path: 'report',    component: ReportComponent },
+    { path: 'report/:reportId',    component: ReportComponent }
 ];

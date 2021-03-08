@@ -20,6 +20,7 @@ export class UserProfileComponent implements OnInit {
   typesNames: string[] = [];
   pageSize = 10;
   totalCount = 0;
+  page = 1;
 
   constructor(private route: ActivatedRoute, private usersService: UsersService, private beneficiariesService: BeneficiariesService, private router: Router) {    
   }
@@ -32,7 +33,7 @@ export class UserProfileComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.userId = params['userId'];
       });
-    console.log(this.userId);
+    //console.log(this.userId);
     
     this.loadUser(this.userId);
     this.loadBeneficiaries(1, this.userId);
@@ -42,10 +43,10 @@ export class UserProfileComponent implements OnInit {
   private loadUser(userId: number) {
     this.usersService.getUser(userId).subscribe((result)=>{
       this.user = result;      
-      // console.log(this.user.birthDate);
+      // //console.log(this.user.birthDate);
       this.user.birthDateString = formatDate(this.user.birthDate, "dd.MM.yyyy", 'en-EN');
       this.typesString = this.user.types && this.user.types.length > 0 ? this.user.types[0] + "" : "-";
-      // console.log(this.user.types);
+      // //console.log(this.user.types);
       if (this.user.types && this.user.types.length > 0 )
       {
         this.user.types.forEach(type => {          
@@ -67,7 +68,7 @@ export class UserProfileComponent implements OnInit {
             this.typesNames.push("Alta specializare");  
             
         });
-        // console.log(this.typesNames);
+        // //console.log(this.typesNames);
       }
     });
   }
@@ -75,6 +76,7 @@ export class UserProfileComponent implements OnInit {
   private loadBeneficiaries(pageNo: number, userId: number) {
     this.beneficiariesService.loadAssignedBeneficiaries(userId).subscribe((result)=>{
       this.beneficiaries = result.data;
+      this.totalCount = result.totalItems;
     });
   }
 
@@ -83,7 +85,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   public async beneficiarySelected(beneficiary: BeneficiaryInfo): Promise<void> {    
-    console.log(beneficiary);    
+    //console.log(beneficiary);    
     this.beneficiariesService.selectedBeneficiary = beneficiary;
   }
 
@@ -93,6 +95,14 @@ export class UserProfileComponent implements OnInit {
       this.beneficiaries = result.data;
       this.totalCount = result.totalItems;
     });
+  }
+
+  pageChanged(event) {
+    if (event.page != undefined && event.pageSize != undefined) {
+      this.page = event.page;
+      this.pageSize = event.pageSize;
+    }
+    this.loadBeneficiaries(this.page, this.pageSize);
   }
 
 }

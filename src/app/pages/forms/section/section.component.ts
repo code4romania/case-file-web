@@ -21,7 +21,7 @@ import { QuestionComponent } from '../question/question.component';
 
     addQuestion()
     {
-        console.log(this.section);
+        //console.log(this.section);
         
         if(!this.section.questions)
             this.section.questions = [];

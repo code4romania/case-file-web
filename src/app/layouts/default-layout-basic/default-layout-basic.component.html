@@ -1,0 +1,66 @@
+<div style="background-color: white;">
+  <!-- class="main-content" -->
+  <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark" style="background-color: white; padding-top: 0px; padding-bottom: 0px;">
+    <div class="px-0" style="margin-left: 100px; margin-right: 100px;width: 100%;">
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <a class="navbar-brand" routerLinkActive="active" [routerLink]="['/login']">
+          <img src="assets/img/brand/Dosarul Digital-01 1.png" style="height: 65px; padding-top: 15px;" />
+        </a>
+        <!-- Navbar items -->
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" [routerLink]="['/home']" style="color: #01A4AE; font-size: 21px;">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" [routerLink]="['/about']" style="color: #01A4AE; font-size: 21px;">Despre proiect</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/home#accountRequest" style="color: #01A4AE; font-size: 21px;">Înscrie-te</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" [routerLink]="['/login']" style="color: #01A4AE; font-size: 21px;">Intră în cont</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
+<footer style="background-color: white; padding-top: 5px;">
+  <div>
+    <div class="row align-items-center justify-content-xl-between" style="background-color: #01A4AE;height: 100px;vertical-align: text-bottom;margin-right: 0px;margin-left: 0px;">
+      <div class="col-md-3" style="text-align: left;padding-left: 10%;"></div>
+      <div class="col-md-3" style="text-align: left;">        
+        <a class="nav-link nav-link-icon" [routerLink]="['/terms']" style="color: #FFFFFF;">Termeni și condiții</a>  
+        <br/>        
+        <a class="nav-link nav-link-icon" [routerLink]="['/policy']" style="color: #FFFFFF; white-space: nowrap;">Politica de confidențialitate și GDPR</a>          
+      </div>
+      <div class="col-md-6" style="text-align: left;padding-left: 15%;">
+        <a class="nav-link nav-link-icon" [routerLink]="['/about']" style="color: #FFFFFF;">Despre proiect</a>
+        <br/>
+        <a class="nav-link nav-link-icon" href="mailto:dosaruldigital@faptedepoveste.ro" style="color: #FFFFFF;">Contact</a>
+      </div>      
+    </div>
+    
+    <div class="row align-items-center justify-content-xl-between" style="margin-right: 0px;margin-left: 0px;">
+      <div class="col-xl-auto">      
+      </div>
+      <div class="col-xl-auto">
+        <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+          <li class="nav-item">
+          </li>
+          <li class="nav-item">
+            <a target="_blank" rel="noopener noreferrer" href="https://www.fundatia-vodafone.ro/"><img src="assets/img/brand/Background 2.png" style="height: 57px;padding-right: 20px;" /></a>
+          </li>
+          <li class="nav-item" >
+            <a target="_blank" rel="noopener noreferrer" href="https://www.fdpsr.ro/centrul-comunitar-cluj/"><img src="assets/img/brand/FDP_transparent.png" style="height: 50px;padding-right: 20px;"/></a>
+          </li>
+          <li class="nav-item" style="padding-top: 5px;">
+            <a target="_blank" rel="noopener noreferrer" href="https://code4.ro/ro"><img src="assets/img/brand/logo Code for Romania 1.png" style="height: 40px;" /></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+</footer>

@@ -12,7 +12,7 @@
       <div class="card shadow" style="width: 60%;">
         <div class="card-header border-0" style="padding-bottom: 0px;">          
             <div class="col-md-12">
-              <h3 class="mb-0" style="color: #3468EF;">{{ description }}</h3>              
+              <h3 class="mb-0" style="color: #01A4AE;">{{ description }}</h3>              
             </div>
         </div>
         <!-- Divider -->
@@ -62,8 +62,9 @@
                         <div class="row" *ngIf="note.attachmentPath && note.attachmentPath.length > 0">
                           <div class="col-md-12">
                             <div class="form-group">
-                              <a href="{{ note.attachmentPath }}" style="color: rgba(0, 0, 0, 0.87);"> <p> note </p></a>
+                              <a [routerLink]="" (click)="loadPhoto(note)" style="color: rgba(0, 0, 0, 0.87);"> <p> notă </p></a>
                             </div>
+                            <img [src]="imageSource" *ngIf="isImageLoading"/>
                           </div>                         
                         </div>
                       </div>
@@ -74,7 +75,7 @@
             </div>          
             <div class="row">            
               <div class="col-md-12" align="right">
-                <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" [routerLink]="['/beneficiary', beneficiaryId]">Inchide</button>
+                <button type="button" class="btn btn-primary my-4" style="background-color: #01A4AE;" [routerLink]="['/beneficiary', beneficiaryId]">Închide</button>
               </div>
             </div> 
           <!-- </form> -->

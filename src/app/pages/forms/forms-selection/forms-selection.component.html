@@ -13,8 +13,8 @@
         <div class="card-header border-0" style="padding-bottom: 0px;">
           <div class="row">
             <div class="col-md-6">
-              <h3 class="mb-0" style="color: #3468EF;">Selectie de formulare</h3>
-              <p style="color: #23278A">Selecteaza din lista de formulare existente cele potrivite pentru acest beneficiar.</p>
+              <h3 class="mb-0" style="color: #01A4AE;">Selecție de formulare</h3>
+              <p style="color: #23278A">Selectează din lista de formulare existente cele potrivite pentru acest beneficiar.</p>
             </div>
           </div>
         </div>
@@ -23,7 +23,7 @@
         <div class="card-header border-0"> 
           <div class="row">
             <div class="col-md-auto">
-              <p>Cauta: </p>
+              <p>Caută: </p>
             </div>         
             <div class="col-md-3" style="padding-left: 0px; ">            
               <div class="form-group" style="margin-bottom: 0px; ">                
@@ -37,9 +37,9 @@
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
                 <tr>
-                  <th scope="col" style="color: #3468EF;">Nr.</th>
-                  <th scope="col" style="color: #3468EF;">Alege</th>
-                  <th scope="col" style="color: #3468EF;">Denumire formular</th>                
+                  <th scope="col" style="color: #01A4AE;">Nr.</th>
+                  <th scope="col" style="color: #01A4AE;">Alege</th>
+                  <th scope="col" style="color: #01A4AE;">Denumire formular</th>                
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -58,7 +58,7 @@
                     {{ form.description }}
                   </td>                
                   <td class="text-right">
-                    <a class="btn btn-sm btn-icon-only text-light" >
+                    <a class="btn btn-sm btn-icon-only text-light" (click)="viewForm(form)"  [routerLink]="['/form', form.id, true]">
                       <img src="./assets/img/icons/common/view.png">
                     </a>
                   </td>
@@ -71,9 +71,9 @@
               <div class="row align-items-center justify-content-xl-between">
                 <div class="col-md-6">
                   <div class="row">
-                    <p>Arata </p>&nbsp;&nbsp;
+                    <p>Arată </p>&nbsp;&nbsp;
                     <input type="text" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;" [(ngModel)]="pageSize" (change)="pageChanged($event)">  
-                    &nbsp;&nbsp; <p>intrari </p>
+                    &nbsp;&nbsp; <p>intrări </p>
                   </div>                
                 </div>
                 <div class="col-md-6">
@@ -86,7 +86,7 @@
           </div>        
           <div class="card-footer py-4">            
             <div class="col-md-12" align="right">
-              <button type="submit" class="btn btn-primary my-4" style="background-color: #3468EF;">Continua</button>
+              <button type="submit" class="btn btn-primary my-4" style="background-color: #01A4AE;">Continuă</button>
               <!-- [routerLink]="['/assistant-selection']" -->
             </div>
           </div>

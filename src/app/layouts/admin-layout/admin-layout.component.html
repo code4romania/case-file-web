@@ -1,14 +1,39 @@
 <!-- Sidenav -->
-<app-sidebar></app-sidebar>
-<div class="main-content bg-white">
+<!-- <app-sidebar></app-sidebar>
+<div class="main-content bg-white" style="height: 100%;"> -->
   <!-- Top navbar -->
-  <app-navbar></app-navbar>
+  <!-- <app-navbar></app-navbar> -->
   <!-- Pages -->
-  <router-outlet></router-outlet>
+  <!-- <router-outlet></router-outlet>
   <div class="container-fluid">
     <app-footer></app-footer>
   </div>
-</div> 
+</div>  -->
+
+
+
+<!-- <app-sidebar></app-sidebar> -->
+<app-navbar></app-navbar>
+<div class="bg-white">
+  <div class="row" style="margin-right: 0px;">
+    <div class="col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-md-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="row" style="margin-right: 0px;">
+    <div class="container-fluid">
+      <app-footer></app-footer>
+    </div>    
+  </div>   
+</div>
+<!-- <div class="container-fluid"> -->
+  <!-- Divider -->
+  <!-- <hr class="my-0"> -->
+  <!-- <app-footer></app-footer>
+</div> -->
 
 
 <!-- Sidenav -->

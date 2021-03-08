@@ -12,7 +12,7 @@
       <div class="card shadow" style="width: 60%;">
         <div class="card-header border-0" style="padding-bottom: 0px;">          
             <div class="col-md-12">
-              <h3 class="mb-0" style="color: #3468EF;">{{ description }}</h3>              
+              <h3 class="mb-0" style="color: #01A4AE;">{{ description }}</h3>              
             </div>            
         </div>
         <!-- Divider -->
@@ -22,7 +22,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <p style="font-weight: bold;">Data completarii*</p>
+                  <p style="font-weight: bold;">Data completării*</p>
                 </div>
               </div>
               <div class="col-md-9">
@@ -31,8 +31,10 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                     </div>                  
-                    <input class="form-control datepicker" placeholder="Alege o data" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
-                    name="dp" [(ngModel)]="dateModel" (dateSelect) = "onDateSelect($event)" />                    
+                    <input *ngIf="!viewForm" class="form-control datepicker" placeholder="Alege o data" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
+                    name="dp" [(ngModel)]="dateModel" (dateSelect) = "onDateSelect($event)" />  
+                    <input *ngIf="viewForm" class="form-control datepicker" placeholder="Alege o data" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
+                    name="dp" [(ngModel)]="dateModel" (dateSelect) = "onDateSelect($event)" disabled />                  
                   </div>
                 </div>
               </div>
@@ -49,7 +51,7 @@
 
                     <div class="row" *ngIf="question.questionType === 4 || question.questionType === 5" style="padding-bottom: 2%;">
                       <div class="col-md-12">
-                        <input type="text" class="form-control" name="{{question.questionId}}" [(ngModel)]="question.optionsToQuestions[0].text" />
+                        <input type="text" placeholder="{{question.hint}}" class="form-control" name="{{question.questionId}}" [(ngModel)]="question.optionsToQuestions[0].text" [attr.disabled]="viewForm ? '' : null"/>
                       </div>
                     </div>
 
@@ -59,8 +61,10 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                           </div>                  
-                          <input class="form-control datepicker" placeholder="Alege o data" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
-                          name="dp" (dateSelect) = "onQDateSelect($event, question)" [(ngModel)]="question.optionsToQuestions[0].text" />                    
+                          <input *ngIf="!viewForm" class="form-control datepicker" placeholder="Alege o data" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
+                          name="dp" (dateSelect) = "onQDateSelect($event, question)" [(ngModel)]="question.optionsToQuestions[0].text" [minDate]="{year: 1921, month: 1, day: 1}"/> 
+                          <input *ngIf="viewForm" class="form-control datepicker" placeholder="Alege o data" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
+                          name="dp" (dateSelect) = "onQDateSelect($event, question)" [(ngModel)]="question.optionsToQuestions[0].text" disabled/>                   
                         </div>
                       </div>
                     </div>
@@ -73,7 +77,7 @@
                           [ngClass]="{ active: option.isSelected }"
                           >
                             <input type="radio" id="name{{ option.idOption }}" name="name{{ question.questionId }}" 
-                            value="{{ option.text }}" (change)="selectOption(question, option, $event)" >{{ option.text }}
+                            value="{{ option.text }}" (change)="selectOption(question, option, $event)" [attr.disabled]="viewForm ? '' : null" >{{ option.text }}
                           </label>
                         </div>                    
                       </div>
@@ -86,15 +90,18 @@
                           *ngFor="let option of question.optionsToQuestions"                          
                           [ngClass]="{ active: option.isSelected }"
                           >
-                            <input type="checkbox" name="name{{ option.idOption }}" [(ngModel)]="option.isSelected" >{{ option.text }}
+                            <input type="checkbox" name="name{{ option.idOption }}" [(ngModel)]="option.isSelected" [attr.disabled]="viewForm ? '' : null">{{ option.text }}
                           </label>
                         </div>
                       </div>
                     </div>
 
                     <div class="row" align="right">
-                      <div class="col-md-12">
-                        <a [routerLink]="" (click)="showNoteSection(question)" *ngIf="!question.showNoteSection" style="color: black;">Adauga o nota</a>
+                      <div class="col-md-12" *ngIf="!viewForm">
+                        <a [routerLink]="" (click)="showNoteSection(question)" *ngIf="!question.showNoteSection" style="color: black;">Adaugă o notă</a>
+                      </div>
+                      <div class="col-md-12" *ngIf="viewForm">
+                        <p style="color: grey; font-size: 1rem; font-weight: 400; line-height: 1.5;">Adaugă o notă</p>
                       </div>
                     </div>
                     <div class="row" align="right" *ngIf="question.showNoteSection">
@@ -112,7 +119,7 @@
                         </div>
                         <div class="row">
                           <div align="left" style="padding-top: 2%;" class="col">
-                            <p style="font-weight: bold;">Incarca o fotografie / un video sau un fisier</p>
+                            <p style="font-weight: bold;">Încarcă o fotografie / un video sau un fișier</p>
                           </div>
                         </div>
                         <div class="row">
@@ -122,7 +129,7 @@
                         </div>
                         <div class="row" style="padding-bottom: 3%;">
                           <div class="col" align="right">
-                            <a style="color: black;" [routerLink]="" (click)="hideNoteSection(question)" >Anuleaza</a>
+                            <a style="color: black;" [routerLink]="" (click)="hideNoteSection(question)" >Anulează</a>
                           </div>
                         </div>
                       </div>
@@ -136,9 +143,9 @@
             </div>
               
                                                
-            <div class="row">            
+            <div class="row" *ngIf="!viewForm">            
               <div class="col-md-12" align="right">
-                <button type="submit" class="btn btn-primary my-4" style="background-color: #3468EF;">Salveaza chestionar</button>
+                <button type="submit" class="btn btn-primary my-4" style="background-color: #01A4AE;">Salvează formular</button>
               </div>
             </div> 
           </form>

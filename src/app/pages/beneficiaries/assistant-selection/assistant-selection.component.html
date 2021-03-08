@@ -13,8 +13,8 @@
         <div class="card-header border-0" style="padding-bottom: 0px;">
           <div class="row">
             <div class="col-md-6">
-              <h3 class="mb-0" style="color: #3468EF;">Selectie asistent</h3>
-              <p style="color: #23278A">Selecteaza asistentul pentru acest beneficiar.</p>
+              <h3 class="mb-0" style="color: #01A4AE;">Selecție asistent</h3>
+              <p style="color: #23278A">Selectează asistentul pentru acest beneficiar.</p>
             </div>
           </div>
         </div>
@@ -37,9 +37,9 @@
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
                 <tr>
-                  <th scope="col" style="color: #3468EF;">Nr.</th>
-                  <th scope="col" style="color: #3468EF;">Alege</th>
-                  <th scope="col" style="color: #3468EF;">Nume asistent</th>                
+                  <th scope="col" style="color: #01A4AE;">Nr.</th>
+                  <th scope="col" style="color: #01A4AE;">Alege</th>
+                  <th scope="col" style="color: #01A4AE;">Nume asistent</th>                
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -71,13 +71,18 @@
               <div class="row align-items-center justify-content-xl-between">
                 <div class="col-md-6">
                   <div class="row">
-                    <p>Arata </p>&nbsp;&nbsp;
-                    <input type="text" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;">  
-                    &nbsp;&nbsp; <p>intrari </p>
-                    &nbsp;&nbsp;&nbsp;&nbsp; <p>Afiseaza 1 - 10 din 68 </p>
+                    <p>Arată </p>&nbsp;&nbsp;
+                    <input type="text" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;" value="{{ pageSize }}" name="pageSize" (change)="pageChanged($event)">  
+                    &nbsp;&nbsp; <p>intrări </p>
+                    <!-- &nbsp;&nbsp;&nbsp;&nbsp; <p>Afiseaza 1 - 10 din 68 </p> -->
                   </div>                
                 </div>
                 <div class="col-md-6">
+                  <app-pagination [page]="page" [pageSize]="pageSize"
+                    [totalItems]="totalCount" (pageChanged)="pageChanged($event)">
+                  </app-pagination>
+                </div>
+                <!-- <div class="col-md-6">
                   <ul class="pagination justify-content-end mb-0">
                     <li class="page-item disabled">
                       <a class="page-link" href="javascript:void(0)" tabindex="-1">
@@ -99,13 +104,13 @@
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> -->
               </div>
             </nav>
           </div>        
           <div class="card-footer py-4">            
             <div class="col-md-12" align="right">
-              <button type="submit" class="btn btn-primary my-4" style="background-color: #3468EF;">Continua</button>
+              <button type="submit" class="btn btn-primary my-4" style="background-color: #01A4AE;">Continuă</button>
             </div>
           </div>
         </form>

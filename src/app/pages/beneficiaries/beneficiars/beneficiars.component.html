@@ -1,11 +1,11 @@
-<div class="header pb-5 pt-5 pt-md-8">
+<!-- <div class="header pb-5 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">      
     </div>
   </div>
-</div>
+</div> -->
 <!-- Page content -->
-<div class="container-fluid" style="margin-top: -7.5rem !important;"> <!-- mt--7 -->
+<div class="container-fluid" style="margin-top: 1.5%;"> <!-- mt--7 -->
   <!-- Table -->
   <div class="row">
     <div class="col">
@@ -13,12 +13,12 @@
         <div class="card-header border-0" style="padding-bottom: 0px;padding-top: 0px;">          
           <div class="row">
             <div class="col-md-9" style="padding-top: 20px;">
-              <h3 class="mb-0" style="color: #3468EF;">Lista beneficiari</h3>
-              <p style="color: #23278A">Cauta cu ajutorul campului de mai jos un beneficiar sau in tabelul tuturor beneficiarilor cu ajutorul filtrelor.</p>
+              <h3 class="mb-0" style="color: #01A4AE;">Listă beneficiari</h3>
+              <p style="color: #23278A">Caută cu ajutorul câmpului de mai jos un beneficiar sau în tabelul tuturor beneficiarilor cu ajutorul filtrelor.</p>
             </div>
             <div class="col-md-3" align="right">
-              <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" [routerLink]="['/beneficiary-info']" (click)="addBeneficiary()">
-                <img src="./assets/img/icons/common/add.png" style="padding-right: 5px;">Adauga beneficiar nou
+              <button type="button" class="btn btn-primary my-4" style="background-color: #01A4AE;" [routerLink]="['/beneficiary-info']" (click)="addBeneficiary()">
+                <img src="./assets/img/icons/common/add.png" style="padding-right: 5px;">Adaugă beneficiar nou
               </button>
             </div>
           </div>
@@ -28,26 +28,26 @@
         <div class="card-header border-0"> 
           <div class="row">
             <div class="col-md-auto">
-              <p>Cauta: </p>
+              <p>Caută: </p>
             </div>         
             <div class="col-md-3" style="padding-left: 0px; ">            
               <div class="form-group" style="margin-bottom: 0px; ">                
                 <input type="text" class="form-control" (keydown.enter)="search($event.target.value)">
               </div>
             </div>
-        </div>
+          </div>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col" style="color: #3468EF;">Nr.</th>
-                <th scope="col" style="color: #3468EF;">Nume</th>
-                <th scope="col" style="color: #3468EF;">Localitate</th>
-                <th scope="col" style="color: #3468EF;">Judet</th>
-                <th scope="col" style="color: #3468EF;">Asistent</th>
-                <th scope="col" style="color: #3468EF;">Varsta</th>
-                <th scope="col" style="color: #3468EF;">Data inregistrarii</th>
+                <th scope="col" style="color: #01A4AE;width: 1%">Nr.</th>
+                <th scope="col" style="color: #01A4AE;">Nume</th>
+                <th scope="col" style="color: #01A4AE;">Localitate</th>
+                <th scope="col" style="color: #01A4AE;">Județ</th>
+                <th scope="col" style="color: #01A4AE;">Asistent</th>
+                <th scope="col" style="color: #01A4AE;width: 2%">Vârstă</th>
+                <th scope="col" style="color: #01A4AE;width: 12%;padding-right: 0px;">Data înregistrării</th>
                 <th scope="col"></th>
                 <th scope="col" *ngIf="currentUser.role === 1"></th>
               </tr>
@@ -57,16 +57,16 @@
                 <td>
                   {{ (page - 1) * pageSize + beneficiariesList.indexOf(beneficiary) + 1 }} 
                 </td>
-                <td>
+                <td style="word-wrap: break-word; white-space: normal;">
                   {{ beneficiary.name }}
                 </td>
-                <td>
+                <td style="word-wrap: break-word; white-space: normal;">
                   {{ beneficiary.city }}
                 </td>
                 <td>                  
                   {{ beneficiary.county }}
                 </td>
-                <td>
+                <td style="word-wrap: break-word; white-space: normal;">
                   {{ beneficiary.assistantName }}
                 </td>
                 <td>                  
@@ -75,12 +75,12 @@
                 <td>
                   {{ beneficiary.registrationDate }}
                 </td>
-                <td class="text-right">                  
+                <td class="text-right" style="width: 1%;padding-left: 0px;">                  
                   <a class="btn btn-sm btn-icon-only text-light" [routerLink]="['/beneficiary', beneficiary.beneficiaryId]" (click)="beneficiarySelected(beneficiary)">
                     <img src="./assets/img/icons/common/view.png">
                   </a>
                 </td>
-                <td class="text-left" *ngIf="currentUser.role === 1">                  
+                <td class="text-left" *ngIf="currentUser.role === 1" style="width: 1%;padding-left: 0px;">                  
                   <a class="btn btn-sm btn-icon-only text-light" (click)="deleteBeneficiary(beneficiary)">                    
                     <img src="./assets/img/icons/common/delete.png">
                   </a>                  
@@ -94,9 +94,9 @@
             <div class="row align-items-center justify-content-xl-between">
               <div class="col-md-6">
                 <div class="row">
-                  <p>Arata </p>&nbsp;&nbsp;
+                  <p>Arată </p>&nbsp;&nbsp;
                   <input type="number" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;" value="{{ pageSize }}" name="pageSize" [(ngModel)]="pageSize" (change)="pageChanged($event)" >  
-                  &nbsp;&nbsp; <p>intrari </p>                  
+                  &nbsp;&nbsp; <p>intrări </p>                  
                 </div>                
               </div>
               <div class="col-md-6">                

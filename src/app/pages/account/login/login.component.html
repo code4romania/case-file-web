@@ -3,8 +3,7 @@
     <div class="header-body text-center mb-7">
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6">
-          <h1 class="text-white">Bine ai venit!</h1>
-          <!-- <p class="text-lead text-light">Use these awesome forms to login or create new account in your project for free.</p> -->
+          <h1 class="text-white">Bine ai venit!</h1>          
         </div>
       </div>
     </div>
@@ -22,7 +21,7 @@
       <div class="card bg-secondary shadow border-0">        
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
-            <small>Intra in cont</small>
+            <small>Intră în cont</small>
           </div>          
           <form role="form" (ngSubmit)="tryLogin()">
             <div class="form-group mb-3">
@@ -38,13 +37,13 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input class="form-control" placeholder="Parola" type="password" id="password" name="password" [(ngModel)]="password">
+                <input class="form-control" placeholder="Parolă" type="password" id="password" name="password" [(ngModel)]="password">
               </div>
             </div>
             <div class="custom-control custom-control-alternative custom-checkbox">
               <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
               <label class="custom-control-label" for=" customCheckLogin">
-                <span class="text-muted">Tine-ma minte</span>
+                <span class="text-muted">Ține-mă minte</span>
               </label>
             </div>
             <p *ngIf="invalid" style="color:red">

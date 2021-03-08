@@ -28,7 +28,7 @@ export class FormsComponent implements OnInit {
   private loadForms(pageNo: number, pageSize: number) {
     this.formsService.searchForms("", pageNo, pageSize).subscribe((result)=>{
       this.formsList = result.data;
-      console.log(this.formsList);
+      //console.log(this.formsList);
       this.totalCount = result.totalItems;
     });
   }
@@ -49,11 +49,6 @@ export class FormsComponent implements OnInit {
     this.loadForms(this.page, this.pageSize);
   }
 
-  public async formSelected(form: FormDetails): Promise<void> {    
-    console.log(form);    
-    this.formsService.selectedForm = form;
-  }
-
   public async addForm(): Promise<void> {         
     this.formsService.selectedForm = null;
   }
@@ -68,6 +63,11 @@ export class FormsComponent implements OnInit {
         
       });
     }
+  }
+
+  public async viewForm(form: FormDetails): Promise<void> {
+    // console.log(form);
+    this.formsService.selectedForm = form;
   }
 
 }

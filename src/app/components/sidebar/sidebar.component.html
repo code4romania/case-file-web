@@ -1,25 +1,22 @@
-<nav class="navbar navbar-vertical navbar-expand-md navbar-light bg-white" id="sidenav-main" style="max-width: 260px;padding-left: 0px;">
-  <div class="container-fluid" style="height: 100%;"> 
-    <div class="card shadow" style="margin-top: 40px;height: 90%;">      
-      <div class="card-body">   
+<nav class="navbar navbar-vertical navbar-light bg-white" id="sidenav-main" style="max-width: 260px;padding-left: 0px;margin-top: 5%;height: 100%;padding-right: 0px;">
+  <!-- <div class="container-fluid" style="height: 100%;">  -->
+    <!-- <div class="card shadow" style="margin-top: 40px;height: 100%;">       -->
+      <div class="card-body" style="height: 100%;">   
         <!-- Brand -->
-        <a class="navbar-brand pt-0" routerLinkActive="active" [routerLink]="['/dashboard']">
-          <img src="./assets/img/brand/LOGO.png" class="navbar-brand-img" alt="...">
+        <a class="navbar-brand" routerLinkActive="active" [routerLink]="['/dashboard']" >
+          <img src="./assets/img/brand/Dosarul Digital-01 1.png" alt="..." style="height: 100%; width: 140px; max-height: 50px;" >
         </a>
-        <!-- Collapse -->
-        <!-- <div class="collapse navbar-collapse"  [ngbCollapse]="isCollapsed" id="sidenav-collapse-main">      -->
-          <!-- Navigation -->
-          <ul class="navbar-nav">
-              <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-                  <a routerLinkActive="active" [routerLink]="[menuItem.path]" class="nav-link">
-                      <!-- <i class="ni {{menuItem.icon}}"></i> -->
-                      <img src="{{menuItem.icon}}" style="padding-left: 3px; padding-right: 6px;">
-                      {{menuItem.title}}
-                  </a>
-              </li>
-          </ul>      
-        <!-- </div> -->
-      </div>
-    </div>
+        <!-- Navigation -->
+        <ul class="navbar-nav" style="padding-top: 10%;">
+            <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item" style="padding-bottom: 10px;">
+                <a routerLinkActive="active" [routerLink]="[menuItem.path]" class="nav-link">
+                    <!-- <i class="ni {{menuItem.icon}}"></i> -->
+                    <img src="{{menuItem.icon}}" style="padding-left: 3px; padding-right: 6px;">
+                    {{menuItem.title}}
+                </a>
+            </li>
+        </ul>
+      <!-- </div> -->
+    <!-- </div> -->
   </div>
 </nav>

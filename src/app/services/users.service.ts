@@ -13,7 +13,8 @@ export class UsersService {
     selectedUser: UserInfo;
     user: User;
     currentUser: UserInfo;
-    verified2FA: boolean = false;   
+    _verified2FA: boolean = false;
+    public verified2FAKey = 'verified2FA';   
 
     constructor(private http: ApiService, private tokenService: TokenService) {
       this.baseUrl = environment.apiUrl;
@@ -26,7 +27,23 @@ export class UsersService {
     }
 
     public logout(): void {
-      this.tokenService.token = undefined;      
+      this.tokenService.token = undefined;
+      this.verified2FA = false;      
+    }
+
+    public set verified2FA(value: boolean) {
+      this._verified2FA = value;
+      if (value === true){
+        localStorage.setItem(this.verified2FAKey, value.toString());
+      } else {
+        localStorage.removeItem(this.verified2FAKey);
+      }
+    }
+    public get verified2FA() {
+      if (localStorage.getItem(this.verified2FAKey) != undefined)
+        return JSON.parse(localStorage.getItem(this.verified2FAKey));
+      else
+        return false;
     }
 
     public loadUsers(pageNo?: number, pageSize?: number)
@@ -70,7 +87,7 @@ export class UsersService {
       return this.http.get<User>(url);
     }
 
-    public deleteUser(userId: string) {
+    public deleteUser(userId: number) {
       const url: string = Location.joinWithSlash(this.baseUrl, `/api/v1/user/deactivate`);
       return this.http.post(url, userId);
     }

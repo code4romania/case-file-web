@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://app-casefile-api-test.azurewebsites.net'
+  apiUrl: 'https://app-casefile-api-prod.azurewebsites.net' //'https://app-casefile-api-test.azurewebsites.net' test prod
 };
 
 /*

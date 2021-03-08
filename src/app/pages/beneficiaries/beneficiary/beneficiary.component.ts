@@ -28,6 +28,8 @@ export class BeneficiaryComponent implements OnInit {
   allocatedFormsPageSize = 5;
   allocatedFormsTotalCount = 0;
   allocatedForms: FormDetails[];
+  isPopupVisible = false;
+  imageSource: any;
 
   constructor(private route: ActivatedRoute, private beneficiariesService: BeneficiariesService, private formsService: FormsService, private usersService: UsersService, private router: Router) {
     
@@ -41,7 +43,7 @@ export class BeneficiaryComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.beneficiaryId = params['beneficiaryId'];
       });
-    console.log(this.beneficiaryId);
+    //console.log(this.beneficiaryId);
     
     this.loadBeneficiary(this.beneficiaryId);
 
@@ -52,7 +54,7 @@ export class BeneficiaryComponent implements OnInit {
     this.beneficiariesService.getBeneficiary(beneficiaryId).subscribe((result)=>{
       this.beneficiary = result;
 
-      // console.log(this.usersService.currentUser);
+      // //console.log(this.usersService.currentUser);
       this.currentUser = this.usersService.currentUser;
       
       this.beneficiary.city = this.beneficiariesService.selectedBeneficiary.city;
@@ -67,18 +69,26 @@ export class BeneficiaryComponent implements OnInit {
     });
   }
 
-  pageChanged(event) {    
+  pageChanged(event) {   
     if (event.page != undefined && event.pageSize != undefined) {
       this.page = event.page;
       this.pageSize = event.pageSize;
     }
-    this.completedForms = this.beneficiary.forms.filter(f => f.questionsAnsweredNo > 0).slice(this.pageSize * (this.page - 1), this.pageSize);
+    var endIndex = this.pageSize * 2 > this.beneficiary.forms.filter(f => f.questionsAnsweredNo > 0).length ? this.beneficiary.forms.length : this.pageSize * 2;
+    if (this.page == 1) {
+      endIndex = this.pageSize;
+    }
+    this.completedForms = this.beneficiary.forms.filter(f => f.questionsAnsweredNo > 0).slice(this.pageSize * (this.page - 1), endIndex);
   }
 
   allocatedFormsPageChanged(event) {
-    this.page = event.page;
-    this.pageSize = event.pageSize;
-    this.allocatedForms = this.beneficiary.forms.slice(this.allocatedFormsPageSize * (this.allocatedFormsPage - 1), this.pageSize);
+    this.allocatedFormsPage = event.page;
+    this.allocatedFormsPageSize = event.pageSize;    
+    var endIndex = this.allocatedFormsPageSize * 2 > this.beneficiary.forms.length ? this.beneficiary.forms.length : this.allocatedFormsPageSize * 2;
+    if (this.allocatedFormsPage == 1) {
+      endIndex = this.allocatedFormsPageSize;
+    }
+    this.allocatedForms = this.beneficiary.forms.slice(this.allocatedFormsPageSize * (this.allocatedFormsPage - 1), endIndex);
   }
   
   private loadNotes(beneficiaryId: number) {
@@ -99,14 +109,14 @@ export class BeneficiaryComponent implements OnInit {
   public async formSelected(form: FormDetails): Promise<void> { 
     this.beneficiariesService.beneficiary = this.beneficiary;   
     this.formsService.selectedForm = form;
-    console.log(this.formsService.selectedForm);
+    //console.log(this.formsService.selectedForm);
   }
 
   public async editForm(form: FormDetails): Promise<void> { 
     this.beneficiariesService.beneficiary = this.beneficiary;   
     this.formsService.selectedForm = form;
     this.formsService.continueEditing = true;
-    console.log(this.formsService.selectedForm);
+    //console.log(this.formsService.selectedForm);
   }
 
   public async deleteForm(form: FormDetails): Promise<void> {    
@@ -126,6 +136,20 @@ export class BeneficiaryComponent implements OnInit {
   }
 
   public async noteSelected(note: Note): Promise<void> {
+    this.isPopupVisible = true;
+
+    // this.formsService.loadNotePhoto(note.attachmentPath).subscribe((result)=>{
+
+    //   let reader = new FileReader();
+    //   reader.addEventListener("load", () => {
+    //     this.imageSource = reader.result;
+    //   }, false);
+  
+    //   if (result) {
+    //     reader.readAsDataURL(result);
+    //   }
+
+    // });
   }
 
   public async deleteNote(note: Note): Promise<void> {

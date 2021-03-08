@@ -1,11 +1,12 @@
-<div class="header pb-5 pt-5 pt-md-8">
+<!-- <div class="header pb-5 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
     </div>
   </div>
-</div>
+</div> -->
 <!-- Page content -->
-<div class="container-fluid" style="margin-top: -7.5rem !important;"> <!-- mt--7 -->
+<!-- style="margin-top: -7.5rem !important;" -->
+<div class="container-fluid" style="margin-top: 1.5%;"> <!-- mt--7 -->
   <!-- Table -->
   <div class="row">
     <div class="col">
@@ -13,12 +14,12 @@
         <div class="card-header border-0" style="padding-bottom: 0px;padding-top: 0px;">
           <div class="row">
             <div class="col-md-8" style="padding-top: 20px;">
-              <h3 class="mb-0" style="color: #3468EF;">Utilizatori</h3>
-              <p style="color: #23278A">Aceasta este lista cu utilizatori ai aplicatiei. Poti adauga un utilizator nou folosind butonul alaturat.</p>
+              <h3 class="mb-0" style="color: #01A4AE;">Utilizatori</h3>
+              <p style="color: #23278A">Aceasta este lista cu utilizatori ai aplicației. Poți adăuga un utilizator nou folosind butonul alăturat.</p>
             </div>
             <div class="col-md-4" align="right">
-              <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" [routerLink]="['/user']" (click)="addUser()">
-                <img src="./assets/img/icons/common/add.png" style="padding-right: 5px;">Adauga utilizator nou
+              <button type="button" class="btn btn-primary my-4" style="background-color: #01A4AE;" [routerLink]="['/user']" (click)="addUser()">
+                <img src="./assets/img/icons/common/add.png" style="padding-right: 5px;">Adaugă utilizator nou
               </button>
             </div>
           </div>
@@ -28,7 +29,7 @@
         <div class="card-header border-0"> 
           <div class="row">
             <div class="col-md-auto">
-              <p>Cauta: </p>
+              <p>Caută: </p>
             </div>         
             <div class="col-md-3" style="padding-left: 0px; ">            
               <div class="form-group" style="margin-bottom: 0px; ">                
@@ -41,10 +42,10 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col" style="color: #3468EF;">Nr.</th>
-                <th scope="col" style="color: #3468EF;">Nume utilizator</th>
-                <th scope="col" style="color: #3468EF;">E-mail</th>
-                <th scope="col" style="color: #3468EF;">Rol</th>                
+                <th scope="col" style="color: #01A4AE;">Nr.</th>
+                <th scope="col" style="color: #01A4AE;">Nume utilizator</th>
+                <th scope="col" style="color: #01A4AE;">E-mail</th>
+                <th scope="col" style="color: #01A4AE;">Rol</th>                
                 <th scope="col"></th>
                 <th scope="col" *ngIf="currentUser.role === 1"></th>
               </tr>
@@ -70,7 +71,7 @@
                     <img src="./assets/img/icons/common/view.png">
                   </a>
                 </td>
-                <td class="text-left" *ngIf="currentUser.role === 1" style="width: 5%;">                  
+                <td class="text-left" *ngIf="currentUser.role === 1" style="width: 5%;padding-left: 0px;">                  
                   <a class="btn btn-sm btn-icon-only text-light" (click)="deleteUser(user)">                    
                     <img src="./assets/img/icons/common/delete.png">
                   </a>                  
@@ -84,9 +85,9 @@
             <div class="row align-items-center justify-content-xl-between">
               <div class="col-md-6">
                 <div class="row">
-                  <p>Arata </p>&nbsp;&nbsp;
+                  <p>Arată </p>&nbsp;&nbsp;
                   <input type="number" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;" value="{{ pageSize }}" name="pageSize" (change)="pageChanged($event)">  
-                  &nbsp;&nbsp; <p>intrari </p>                  
+                  &nbsp;&nbsp; <p>intrări </p>                  
                 </div>                
               </div>
               <div class="col-md-6">

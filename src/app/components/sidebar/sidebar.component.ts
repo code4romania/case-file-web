@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
 
 declare interface RouteInfo {
     path: string;
@@ -8,20 +9,14 @@ declare interface RouteInfo {
     class: string;
 }
 export const ROUTES: RouteInfo[] = [
-    // { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-    // { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
-    // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
-    // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
-    // { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
-    // { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
-    // { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' }
     { path: '/dashboard', title: 'Dashboard',  icon: './assets/img/icons/common/dashboard.png', class: '' },
-    { path: '/beneficiary-info', title: 'Adauga un beneficiar',  icon:'./assets/img/icons/common/add_beneficiary.png', class: '' },
-    { path: '/beneficiars', title: 'Lista beneficiari',  icon:'./assets/img/icons/common/beneficiars.png', class: '' },
+    { path: '/beneficiary-info', title: 'Adaugă un beneficiar',  icon:'./assets/img/icons/common/add_beneficiary.png', class: '' },
+    { path: '/beneficiars', title: 'Listă beneficiari',  icon:'./assets/img/icons/common/beneficiars.png', class: '' },
     { path: '/forms', title: 'Management formulare',  icon:'./assets/img/icons/common/forms1.png', class: '' },
     { path: '/users', title: 'Utilizatori',  icon:'./assets/img/icons/common/users.png', class: '' },
     { path: '/statistics', title: 'Rapoarte',  icon:'./assets/img/icons/common/statistics.png', class: '' },
-    { path: '/settings', title: 'Setari',  icon:'./assets/img/icons/common/settings.png', class: '' }    
+    { path: '/settings', title: 'Setări',  icon:'./assets/img/icons/common/settings.png', class: '' },
+    { path: '/ngo', title: 'Solicitări',  icon:'./assets/img/icons/common/forms1.png', class: '' }   
 ];
 
 @Component({
@@ -34,12 +29,22 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private usersService: UsersService) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
    });
+
+   this.usersService.loadCurrentUserInfo().subscribe(result => 
+    { 
+      this.usersService.currentUser = result;
+      
+      if (this.usersService.currentUser == undefined || this.usersService.currentUser.role != 2){
+        this.menuItems = this.menuItems.filter(menuItem => menuItem.title != "Solicitări")
+      }
+    });    
+
   }
 }

@@ -5,12 +5,12 @@
         <div class="row">
           <div class="col-md-3">
             <div class="form-group">
-              <p>Titlu intrebare*</p>
+              <p>Titlu întrebare*</p>
             </div>
           </div>
           <div class="col-md-9">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="ex: Dezvoltarea senzoriala" [(ngModel)]="currentQuestion.text">              
+              <input type="text" class="form-control" placeholder="ex: Dezvoltarea senzorială" [(ngModel)]="currentQuestion.text">              
             </div>
           </div>            
         </div>
@@ -22,24 +22,24 @@
           </div>
           <div class="col-md-9">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="ex: integritatea sau afectarea senzoriala (descriere)" [(ngModel)]="currentQuestion.hint">              
+              <input type="text" class="form-control" placeholder="ex: integritatea sau afectarea senzorială (descriere)" [(ngModel)]="currentQuestion.hint">              
             </div>
           </div>            
         </div>
         <div class="row">
           <div class="col-md-3">
             <div class="form-group">
-              <p>Tip camp*</p>
+              <p>Tip câmp*</p>
             </div>
           </div>
           <div class="col-md-9">
             <div class="form-group">
               <select class="form-control" value="currentQuestion.questionType" (change)="questionTypeChange($event, currentQuestion)" [(ngModel)]="currentQuestion.questionType">                            
                 <option value="4" selected="selected">Text</option>
-                <option value="5">Numar</option>
-                <option value="6">Data</option>
-                <option value="1">Selectie simpla</option>
-                <option value="0">Selectie multipla</option>
+                <option value="5">Număr</option>
+                <option value="6">Dată</option>
+                <option value="1">Selecție simplă</option>
+                <option value="0">Selecție multiplă</option>
               </select>
             </div>
           </div>            
@@ -59,7 +59,7 @@
         <div class="row"  *ngIf="showOptions">
           <div class="col-md-3">
             <div class="form-group">
-              <p>Option text</p>
+              <p>Opțiune 1...n</p>
             </div>
           </div>
           <div class="col-md-9">
@@ -73,7 +73,7 @@
             </div>  
           </div>
           <div class="col-md-12" align="right">
-            <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" (click)="addOption()">Adauga optiune</button>
+            <button type="button" class="btn btn-primary my-4" style="background-color: #01A4AE;" (click)="addOption()">Adaugă opțiune</button>
           </div>
         </div>
         <div class="row">

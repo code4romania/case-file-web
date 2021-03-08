@@ -1,0 +1,111 @@
+<div style="background-color: white;">
+  <!-- class="main-content" -->
+  <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark" style="background-color: white; padding-top: 0px; padding-bottom: 0px;">
+    <div class="px-0" style="margin-left: 100px; margin-right: 100px;width: 100%;">
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <a class="navbar-brand" routerLinkActive="active" [routerLink]="['/login']">
+          <img src="assets/img/brand/Dosarul Digital-01 1.png" style="height: 65px; padding-top: 15px;" />
+        </a>
+        <!-- Navbar items -->
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" [routerLink]="['/home']" style="color: #01A4AE; font-size: 21px;">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" [routerLink]="['/about']" style="color: #01A4AE; font-size: 21px;">Despre proiect</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/home#accountRequest" style="color: #01A4AE; font-size: 21px;">Înscrie-te</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" [routerLink]="['/login']" style="color: #01A4AE; font-size: 21px;">Intră în cont</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
+<footer style="background-color: white; padding-top: 5px;">
+  <div>
+    <div class="row align-items-center justify-content-xl-between" style="background-color: #01A4AE;height: 100px;vertical-align: text-bottom;margin-right: 0px;margin-left: 0px;">
+      <div class="col-md-3" style="text-align: left;padding-left: 10%;"></div>
+      <div class="col-md-3" style="text-align: left;padding-right: 0px;">        
+        <a class="nav-link nav-link-icon" [routerLink]="['/terms']" style="color: #FFFFFF;">Termeni și condiții</a>  
+        <br/>        
+        <a class="nav-link nav-link-icon" [routerLink]="['/policy']" style="color: #FFFFFF; white-space: nowrap;">Politica de confidențialitate și GDPR</a>          
+      </div>
+      <div class="col-md-6" style="text-align: left;padding-left: 12%;">
+        <a class="nav-link nav-link-icon" [routerLink]="['/about']" style="color: #FFFFFF;">Despre proiect</a>
+        <br/>
+        <a class="nav-link nav-link-icon" href="mailto:dosaruldigital@faptedepoveste.ro" style="color: #FFFFFF;">Contact</a>
+      </div>
+      <!-- <div class="col-md-4" style="text-align: left;padding-left: 10%;">
+        <a class="nav-link nav-link-icon" href="https://www.fundatia-vodafone.ro/" style="color: #FFFFFF;">Fundația Vodafone Romania</a>
+        <br/>
+        <a class="nav-link nav-link-icon" href="https://civiclabs.ro/ro" style="color: #FFFFFF;">Civic Labs</a>
+      </div> -->
+    </div>
+    <!-- <div class="row align-items-center justify-content-xl-between" style="background-color: #363636;height: 150px;vertical-align: text-top">
+      <div class="col-md-4" style="text-align: left;padding-left: 10%;">
+        <a class="nav-link nav-link-icon" href="" style="color: #FFFFFF;">Politica de confidențialitate</a>
+      </div>
+      <div class="col-md-4" style="text-align: center;">
+        <a class="nav-link nav-link-icon" href="" style="color: #FFFFFF;">Contact</a>
+      </div>
+      <div class="col-md-4" style="text-align: center;">
+        <a class="nav-link nav-link-icon" href="" style="color: #FFFFFF;">Civic Labs</a>
+      </div>
+    </div> -->
+    <div class="row align-items-center justify-content-xl-between" style="padding-top: 3%; padding-bottom: 3%;margin-right: 0px;margin-left: 0px;">
+      <div class="col-xl-12">
+        <ul class="nav nav-footer justify-content-center justify-content-xl-center">
+          <li class="nav-item">
+            <div style="padding-top: 25%;">
+              <p style="font-size: 14px;">soluție finanțată de</p>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a target="_blank" rel="noopener noreferrer" href="https://www.fundatia-vodafone.ro/"><img src="assets/img/brand/Background 2.png" style="padding-right: 20px;" /></a>
+          </li>
+          <li class="nav-item">
+            <div style="padding-top: 25%;">
+              <p style="font-size: 14px;">implementată de</p>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/fdpcluj"><img src="assets/img/brand/FDP_transparent.png" style="padding-right: 20px; height: 80px;"/></a>
+          </li>
+          <li class="nav-item">
+            <div style="padding-top: 30%;">
+              <p style="font-size: 14px;">proiectată în</p>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a target="_blank" rel="noopener noreferrer" href="https://civiclabs.ro/ro"><img src="assets/img/brand/Civiclabs logo png.png"  style="padding-right: 10px; padding-top: 15px;"/></a>
+          </li>
+          <li class="nav-item">
+            <div style="padding-top: 50%;">
+              <p style="font-size: 14px;">de către</p>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a target="_blank" rel="noopener noreferrer" href="https://code4.ro/ro"><img src="assets/img/brand/logo Code for Romania 1.png"  style="padding-top: 15px;"/></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row align-items-center justify-content-xl-between" style="padding-bottom: 3%;margin-right: 0px;margin-left: 0px;">
+      <div class="col-xl-12">
+        <ul class="nav nav-footer justify-content-center justify-content-xl-center">          
+          <li class="nav-item">
+            <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/fdpcluj"><img src="assets/img/icons/common/Facebook Button.png" /></a>
+          </li>
+          <li class="nav-item">
+            <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/clujfdp/?hl=en"><img src="assets/img/icons/common/instagram-circle-icon-png-4.jpg" style="padding-top: 2px;"/></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

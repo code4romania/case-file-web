@@ -13,11 +13,11 @@
         <div class="card-header border-0" style="padding-bottom: 0px;">
           <div class="row">
             <div class="col-md-10">
-              <h3 class="mb-0" style="color: #3468EF;">Date beneficiar</h3>
-              <p style="color: #23278A">Acestea sunt informatiile de baza despre beneficiar.</p>
+              <h3 class="mb-0" style="color: #01A4AE;">Date beneficiar</h3>
+              <p style="color: #23278A">Acestea sunt informațiile de bază despre beneficiar.</p>
             </div>
             <div class="col-md-2" align="right">
-              <img src="./assets/img/icons/common/edit.png" style="padding-right: 5px;" [routerLink]="['/beneficiary-info']" (click)="editBeneficiary()">
+              <img src="./assets/img/icons/common/edit.png" style="padding-right: 5px;" [routerLink]="['/beneficiary-info', beneficiary.beneficiaryId]" (click)="editBeneficiary()">
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
               <label><b>{{ beneficiary.name }}</b></label>
             </div>
             <div class="col-md-2">
-              <p>Judet:</p>
+              <p>Județ:</p>
             </div>
             <div class="col-md-4">
               <label><b>{{ beneficiary.county }}</b></label>
@@ -40,7 +40,7 @@
           </div>
           <div class="row">
             <div class="col-md-3">
-              <p>Data nasterii:</p>
+              <p>Data nașterii:</p>
             </div>
             <div class="col-md-3">
               <label><b>{{ beneficiary.birthDateString }}</b></label>
@@ -54,14 +54,14 @@
           </div>
           <div class="row">
             <div class="col-md-3">
-              <p>Stare civila:</p>
+              <p>Stare civilă:</p>
             </div>
             <div class="col-md-3">
               <!-- <label><b>{{ beneficiary.civilStatus }}</b></label> -->
-              <label *ngIf="beneficiary.civilStatus===0"><b>necasatorit/a</b></label>
-              <label *ngIf="beneficiary.civilStatus===1"><b>casatorit/a</b></label>
-              <label *ngIf="beneficiary.civilStatus===2"><b>divortat/a</b></label>
-              <label *ngIf="beneficiary.civilStatus===3"><b>vaduv/a</b></label>
+              <label *ngIf="beneficiary.civilStatus===0"><b>necăsătorit/ă</b></label>
+              <label *ngIf="beneficiary.civilStatus===1"><b>căsătorit/ă</b></label>
+              <label *ngIf="beneficiary.civilStatus===2"><b>divorțat/ă</b></label>
+              <label *ngIf="beneficiary.civilStatus===3"><b>văduv/ă</b></label>
               <label *ngIf="beneficiary.civilStatus===4"><b>concubinaj</b></label>
             </div>
             <div class="col-md-2">
@@ -103,7 +103,7 @@
         <div class="card-header border-0" style="padding-bottom: 0px;">
           <div class="row">
             <div class="col-md-10">
-              <h3 class="mb-0" style="color: #3468EF;">Formulare alocate</h3>
+              <h3 class="mb-0" style="color: #01A4AE;">Formulare alocate</h3>
               <p style="color: #23278A">Acestea sunt formularele pe care le vei completa pentru acest beneficiar.</p>
             </div>
             <div class="col-md-2" align="right">
@@ -115,8 +115,8 @@
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
                 <tr>
-                  <th scope="col" style="color: #3468EF;">Nr.</th>
-                  <th scope="col" style="color: #3468EF;">Denumire formular</th>                
+                  <th scope="col" style="color: #01A4AE;">Nr.</th>
+                  <th scope="col" style="color: #01A4AE;">Denumire formular</th>                
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -125,7 +125,7 @@
                   <td style="width: 3%;">
                     {{ (allocatedFormsPage - 1) * allocatedFormsPageSize + allocatedForms.indexOf(form) + 1 }}
                   </td>                  
-                  <td>
+                  <td style="word-wrap: break-word; white-space: normal;">
                     {{ form.description }}
                   </td>                
                   <td class="text-right" style="width: 3%;">
@@ -159,11 +159,11 @@
         <div class="card-header border-0" style="padding-bottom: 0px;">
           <div class="row">
             <div class="col-md-6">
-              <h3 class="mb-0" style="color: #3468EF;">Istoric evaluare</h3>
-              <p style="color: #23278A">Aici poti vedea istoricul beneficiarului.</p>
+              <h3 class="mb-0" style="color: #01A4AE;">Istoric evaluare</h3>
+              <p style="color: #23278A">Aici poți vedea istoricul beneficiarului.</p>
             </div>
             <div class="col-md-6" align="right">
-              <!-- <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" [routerLink]="['/forms-selection']" (click)="editAssignedForms()">
+              <!-- <button type="button" class="btn btn-primary my-4" style="background-color: #01A4AE;" [routerLink]="['/forms-selection']" (click)="editAssignedForms()">
                 <img src="./assets/img/icons/common/mdi_file_copy.png" style="padding-right: 5px;" >Completeaza formular</button> -->
             </div>
           </div>
@@ -173,7 +173,7 @@
         <div class="card-header border-0"> 
           <div class="row">
             <div class="col-md-auto">
-              <p>Cauta: </p>
+              <p>Caută: </p>
             </div>         
             <div class="col-md-3" style="padding-left: 0px; ">            
               <div class="form-group">                
@@ -186,10 +186,10 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col" style="color: #3468EF; width: 5%;">Nr.</th>
-                <th scope="col" style="color: #3468EF;">Denumire formular</th>
-                <th scope="col" style="color: #3468EF; width: 15%;">Completat de</th>
-                <th scope="col" style="color: #3468EF; width: 10%;">Data</th>
+                <th scope="col" style="color: #01A4AE; width: 5%;">Nr.</th>
+                <th scope="col" style="color: #01A4AE;">Denumire formular</th>
+                <th scope="col" style="color: #01A4AE; width: 15%;">Completat de</th>
+                <th scope="col" style="color: #01A4AE; width: 10%;">Data</th>
                 <th scope="col" style="width: 10%;"></th>
               </tr>
             </thead>
@@ -198,7 +198,7 @@
                 <td style="width: 5%;">
                   {{ (page - 1) * pageSize + completedForms.indexOf(form) + 1 }}
                 </td>
-                <td>
+                <td style="word-wrap: break-word; white-space: normal;">
                   {{ form.description }}
                 </td>
                 <td style="width: 15%;">
@@ -232,9 +232,9 @@
             <div class="row align-items-center justify-content-xl-between">
               <div class="col-md-6">
                 <div class="row">
-                  <p>Arata </p>&nbsp;&nbsp;
+                  <p>Arată </p>&nbsp;&nbsp;
                   <input type="number" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;" value="{{ pageSize }}" name="pageSize" [(ngModel)]="pageSize" (change)="pageChanged($event)">  
-                  &nbsp;&nbsp; <p>intrari </p>
+                  &nbsp;&nbsp; <p>intrări </p>
                 </div>                
               </div>
               <div class="col-md-6">
@@ -255,38 +255,25 @@
         <div class="card-header border-0" style="padding-bottom: 0px;">
           <div class="row">
             <div class="col-md-6">
-              <h3 class="mb-0" style="color: #3468EF;">Istoric note generale</h3>
-              <p style="color: #23278A">Aici poti vedea istoricul notelor generale ale beneficiarului.</p>
+              <h3 class="mb-0" style="color: #01A4AE;">Istoric note generale</h3>
+              <p style="color: #23278A">Aici poți vedea istoricul notelor generale ale beneficiarului.</p>
             </div>
             <div class="col-md-6" align="right">
-              <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" [routerLink]="['/note']" (click)="addNote()">
-                <img src="./assets/img/icons/common/mdi_file_copy.png" style="padding-right: 5px;" >Adauga nota
+              <button type="button" class="btn btn-primary my-4" style="background-color: #01A4AE;" [routerLink]="['/note']" (click)="addNote()">
+                <img src="./assets/img/icons/common/mdi_file_copy.png" style="padding-right: 5px;" >Adaugă notă
               </button>
             </div>
           </div>
         </div>
-        <!-- Divider -->
-        <!--<hr class="my-0">
-        <div class="card-header border-0"> 
-          <div class="row">
-            <div class="col-md-auto">
-              <p>Cauta: </p>
-            </div>         
-            <div class="col-md-3" style="padding-left: 0px; ">            
-              <div class="form-group">                
-                <input type="text" class="form-control">
-              </div>
-            </div>
-          </div>
-        </div> -->
+        
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col" style="color: #3468EF; width: 5%;">Nr.</th>
-                <th scope="col" style="color: #3468EF;">Nota</th>
-                <!-- <th scope="col" style="color: #3468EF; width: 15%;">Completat de</th> -->
-                <th scope="col" style="color: #3468EF; width: 10%;">Data</th>
+                <th scope="col" style="color: #01A4AE; width: 5%;">Nr.</th>
+                <th scope="col" style="color: #01A4AE;">Notă</th>
+                <!-- <th scope="col" style="color: #01A4AE; width: 15%;">Completat de</th> -->
+                <th scope="col" style="color: #01A4AE; width: 10%;">Data</th>
                 <th scope="col" style="width: 10%;"></th>
               </tr>
             </thead>
@@ -295,18 +282,15 @@
                 <td style="width: 5%;">
                   {{ notes.indexOf(note) + 1 }}
                 </td>
-                <td>
+                <td style="word-wrap: break-word; white-space: normal;">
                   {{ note.text }}
-                </td>
-                <!-- <td style="width: 15%;">
-                  {{ note.text }}
-                </td>                 -->
+                </td>                
                 <td style="width: 10%;">                  
                   {{ note.lastModified.slice(0,10) }}
                 </td>
-                <td class="text-right" style="width: 10%;">
-                  <a class="btn btn-sm btn-icon-only text-light" >
-                    <img src="./assets/img/icons/common/view.png" [routerLink]="['/note', note.questionId]" (click)="noteSelected(note)">
+                <td class="text-right" style="width: 10%;">                  
+                  <a class="btn btn-sm btn-icon-only text-light" (click)="noteSelected(note)">
+                    <img src="./assets/img/icons/common/view.png" >
                   </a>                  
                   <!-- <a class="btn btn-sm btn-icon-only text-light" *ngIf="currentUser.role === 1" >
                     <img src="./assets/img/icons/common/delete.png" (click)="deleteNote(note)">
@@ -315,50 +299,49 @@
               </tr>
               <tr *ngIf="!notes || notes.length === 0">
                 <td colspan="5" align="center">
-                  <img src="./assets/img/icons/common/text.png">
+                  <img src="./assets/img/icons/common/text - no notes.png">
                 </td>
               </tr>              
             </tbody>
           </table>
-        </div>
-        <!-- <div class="card-footer py-4" *ngIf="notes && notes.length > 0">
-          <nav aria-label="...">
-            <div class="row align-items-center justify-content-xl-between">
-              <div class="col-md-6">
-                <div class="row">
-                  <p>Arata </p>&nbsp;&nbsp;
-                  <input type="text" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;">  
-                  &nbsp;&nbsp; <p>intrari </p>
-                  &nbsp;&nbsp;&nbsp;&nbsp; <p>Afiseaza 1 - 10 din 68 </p>
-                </div>                
-              </div>
-              <div class="col-md-6">
-                <ul class="pagination justify-content-end mb-0">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="javascript:void(0)" tabindex="-1">
-                      <i class="fas fa-angle-left"></i>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="javascript:void(0)">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0)">2 <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0)">
-                      <i class="fas fa-angle-right"></i>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-        </div> -->
+        </div>        
       </div>
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade in" id="exampleModal" role="dialog" aria-hidden="false" ng-show="isPopupVisible">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Vizualizare atașament notă</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <img [src]="imageSource" /> -->
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="modal fade in" aria-hidden="false" style="display: block;" ng-show="isPopupVisible">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="closePopup()">&times;</button>
+        <h3>Vizualizare atașament notă</h3>
+      </div>
+      <div class="modal-body">
+        <img [src]="imageSource" />
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div> -->

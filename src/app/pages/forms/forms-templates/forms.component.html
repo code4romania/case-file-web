@@ -14,12 +14,12 @@
           <div class="row">
             <!-- class="col-md-9" -->
             <div class="col" style="padding-top: 20px; padding-right: 0px; max-width: 80%; flex: 0 0 80%;">
-              <h3 class="mb-0" style="color: #3468EF;">Formulare predefinite</h3>
-              <p style="color: #23278A">Aceasta este lista cu formulare disponibile pentru a fi completate. Selecteaza orice formular si completeaza-l pentru unul dintre pacientii pentru care este alocat.</p>
+              <h3 class="mb-0" style="color: #01A4AE;">Formulare predefinite</h3>
+              <p style="color: #23278A">Aceasta este lista cu formulare disponibile pentru a fi completate. Selectează orice formular și completează-l pentru unul dintre beneficiarii pentru care este alocat.</p>
             </div>
             <div class="col" align="right" style=" max-width: 20%; flex: 0 0 20%;">
-              <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" [routerLink]="['/form-create']" (click)="addForm()">
-                <img src="./assets/img/icons/common/add.png" style="padding-right: 5px;">Adauga formular nou
+              <button type="button" class="btn btn-primary my-4" style="background-color: #01A4AE;" [routerLink]="['/form-create']" (click)="addForm()">
+                <img src="./assets/img/icons/common/add_form.png" style="padding-right: 5px;">Adaugă formular nou
               </button>
             </div>
           </div>
@@ -29,7 +29,7 @@
         <div class="card-header border-0"> 
           <div class="row">
             <div class="col-md-auto">
-              <p>Cauta: </p>
+              <p>Caută: </p>
             </div>         
             <div class="col-md-3" style="padding-left: 0px; ">            
               <div class="form-group" style="margin-bottom: 0px; ">                
@@ -42,10 +42,11 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col" style="color: #3468EF;">Nr.</th>
-                <th scope="col" style="color: #3468EF;">Denumire formular</th>
-                <th scope="col" style="color: #3468EF;">Creat de</th>
-                <th scope="col" style="color: #3468EF;">Data</th>                
+                <th scope="col" style="color: #01A4AE;">Nr.</th>
+                <th scope="col" style="color: #01A4AE;">Denumire formular</th>
+                <th scope="col" style="color: #01A4AE;">Creat de</th>
+                <th scope="col" style="color: #01A4AE;">Dată</th> 
+                <th scope="col" style="color: #01A4AE;">Nivel de acces</th>               
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -54,7 +55,7 @@
                 <td style="width: 5%;">
                   {{ (page - 1) * pageSize + formsList.indexOf(form) + 1 }}
                 </td>
-                <td>
+                <td style="word-wrap: break-word; white-space: normal;">
                   {{ form.description }}
                 </td>
                 <td style="width: 15%;">
@@ -62,8 +63,15 @@
                 </td> 
                 <td style="width: 10%;">
                   {{ form.date }}
+                </td> 
+                <td style="width: 10%;">
+                  <label *ngIf="form.type===0">Privat</label>
+                  <label *ngIf="form.type===1">Public</label>
                 </td>               
                 <td class="text-right" style="width: 5%;">
+                  <a class="btn btn-sm btn-icon-only text-light" (click)="viewForm(form)"  [routerLink]="['/form', form.id, true]">
+                    <img src="./assets/img/icons/common/view.png">
+                  </a>
                   <a *ngIf="form.canBeModified" class="btn btn-sm btn-icon-only text-light">
                     <img src="./assets/img/icons/common/edit.png">
                   </a>
@@ -80,9 +88,9 @@
             <div class="row align-items-center justify-content-xl-between">
               <div class="col-md-6">
                 <div class="row">
-                  <p>Arata </p>&nbsp;&nbsp;
+                  <p>Arată </p>&nbsp;&nbsp;
                   <input type="number" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;" value="{{ pageSize }}" name="pageSize" [(ngModel)]="pageSize" (change)="pageChanged($event)">  
-                  &nbsp;&nbsp; <p>intrari </p>                  
+                  &nbsp;&nbsp; <p>intrări </p>                  
                 </div>                
               </div>
               <div class="col-md-6">

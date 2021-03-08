@@ -47,12 +47,14 @@ export class SectionCreateComponent implements OnInit {
   saveForm()
   {
     if(this.form.formSections == undefined || this.form.formSections.length <= 0) {
-      alert("Formularul trebuie sa contina cel putin o sectiune.");
+      alert("Formularul trebuie să conțină cel puțin o secțiune.");
       return;
     }
 
     this.form.formSections.forEach(section  => {
       if (section.questions != undefined && section.questions.length > 0) {
+
+        section.questions = section.questions.filter(q => q.text != undefined && q.text != null && q.text != '');
 
         section.questions.forEach(question => {
           question.questionType = +question.questionType;
@@ -68,22 +70,22 @@ export class SectionCreateComponent implements OnInit {
         });
       }
     });
-    console.log("form to save: ");
-    console.log(this.form);
+    //console.log("form to save: ");
+    //console.log(this.form);
 
     var activeButton = document.activeElement.id;
-    console.log("activeButton");
-    console.log(activeButton);
+    //console.log("activeButton");
+    //console.log(activeButton);
 
     if (activeButton == "saveBtn") {
       this.formsService.saveForm(this.form).subscribe((result)=>{
-        console.log(result);
+        //console.log(result);
         this.router.navigate(['/forms']);
       });
     }
     if (activeButton == "publishBtn") {
       this.formsService.saveAndPublishForm(this.form).subscribe((result)=>{
-        console.log(result);
+        //console.log(result);
         this.router.navigate(['/forms']);
       });
     }    

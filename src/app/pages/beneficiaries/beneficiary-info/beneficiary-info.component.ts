@@ -25,6 +25,7 @@ export class BeneficiaryInfoComponent implements OnInit {
   usersList: UserInfo[];
   // county: County;
   dateModel: NgbDateStruct;
+  beneficiaryId: number;
 
   constructor(private beneficiariesService: BeneficiariesService, private usersService: UsersService, private router: Router, private route: ActivatedRoute) { }
 
@@ -37,6 +38,15 @@ export class BeneficiaryInfoComponent implements OnInit {
     this.loadBeneficiaries();
     this.loadUsers();
 
+    this.route.params.subscribe(params => {
+      this.beneficiaryId = params['beneficiaryId'];
+      });
+    //console.log(this.beneficiaryId);
+
+    if (this.beneficiaryId == undefined) {
+      this.beneficiariesService.beneficiary = undefined;
+    }
+
     if(this.beneficiariesService.beneficiary)
     {
       this.title = "Editeaza beneficiar";
@@ -44,13 +54,13 @@ export class BeneficiaryInfoComponent implements OnInit {
       this.beneficiary.familyMembersIds = this.beneficiary.familyMembers != null 
                       ? this.beneficiary.familyMembers.map(function(el) { return el.beneficiaryId.toString() }) 
                       : null;
-      console.log(this.beneficiariesService.beneficiary);            
+      //console.log(this.beneficiariesService.beneficiary);            
       this.loadCities(this.beneficiary.countyId);
       var date = new Date(this.beneficiary.birthDate);      
       this.dateModel = { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
     }
     else {
-      this.title = "Adauga beneficiar nou";
+      this.title = "Adaugă beneficiar nou";
       this.beneficiary = <Beneficiary>{};
       this.beneficiary.civilStatus = -1;
       this.beneficiary.gender = -1;
@@ -74,7 +84,7 @@ export class BeneficiaryInfoComponent implements OnInit {
 
   changeCounty(event)
   {
-    console.log(event.target.value);
+    //console.log(event.target.value);
     let countyId = event.target.value; 
     this.loadCities(countyId);
   }
@@ -91,7 +101,7 @@ export class BeneficiaryInfoComponent implements OnInit {
 
   // onDateSelect(evt:any) {
   //   this.birthDate = new Date(evt.year,evt.month,evt.day);
-  //   console.log(this.birthDate);
+  //   //console.log(this.birthDate);
   // }
 
   onDateSelect(evt:any) {
@@ -114,11 +124,37 @@ export class BeneficiaryInfoComponent implements OnInit {
     this.beneficiary.gender = +this.beneficiary.gender;    
     this.beneficiary.birthDate = this.birthDate;    
     this.beneficiary.userId = +this.beneficiary.userId;
-    this.beneficiary.familyMembersIds = this.beneficiary.familyMembersIds.map(Number);
+    this.beneficiary.familyMembersIds = this.beneficiary.familyMembersIds != undefined && this.beneficiary.familyMembersIds.length > 0 
+                                        ? this.beneficiary.familyMembersIds.map(Number) : null;
+
+    if (this.beneficiary.name == undefined || this.beneficiary.name == "")
+    {
+      alert ("Vă rugăm completați un nume pentru acest beneficiar.");
+    }
+    else if (this.beneficiary.birthDate == undefined)
+    {
+      alert ("Vă rugăm completați data nașterii pentru acest beneficiar.");
+    }
+    else if (this.beneficiary.civilStatus == undefined || this.beneficiary.civilStatus == -1) {
+      alert ("Vă rugăm completați starea civilă a acestui beneficiar.");
+    }
+    else if (this.beneficiary.countyId == undefined || this.beneficiary.countyId == -1) {
+      alert ("Vă rugăm alegeți un județ pentru acest beneficiar.");
+    }
+    else if (this.beneficiary.cityId == undefined || this.beneficiary.cityId == -1) {
+      alert ("Vă rugăm alegeți un oraș pentru acest beneficiar.");
+    }
+    else if (this.beneficiary.gender == undefined || this.beneficiary.gender == -1) {
+      alert ("Vă rugăm completați genul acestui beneficiar.");
+    }
+    else if (this.beneficiary.userId == undefined || this.beneficiary.userId == -1) {
+      alert ("Vă rugăm alegeți un asistent pentru acest beneficiar.");
+    }
+
     this.beneficiariesService.beneficiary = this.beneficiary;
     
-    console.log("info to save: ");
-    console.log(this.beneficiary);
+    //console.log("info to save: ");
+    //console.log(this.beneficiary);
 
     if(this.beneficiary.beneficiaryId > 0)
     {
@@ -134,8 +170,8 @@ export class BeneficiaryInfoComponent implements OnInit {
       benToSave.familyMembersIds = this.beneficiary.familyMembersIds;
 
       this.beneficiariesService.saveChanges(benToSave, benToSave).subscribe((result)=>{
-        console.log(result);        
-        console.log(this.beneficiariesService.beneficiary);
+        //console.log(result);        
+        //console.log(this.beneficiariesService.beneficiary);
 
         this.beneficiariesService.selectedBeneficiary.city = this.citiesList.filter(c => c.cityId == this.beneficiary.cityId)[0].name;
         this.beneficiariesService.selectedBeneficiary.county = this.countiesList.filter(c => c.countyId == this.beneficiary.countyId)[0].name;

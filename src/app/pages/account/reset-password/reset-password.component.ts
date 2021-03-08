@@ -18,7 +18,7 @@ export class ResetPasswordComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.token = params['token'];
       });
-    console.log(this.token);
+    //console.log(this.token);
     
   }
 
@@ -26,15 +26,15 @@ export class ResetPasswordComponent implements OnInit {
     var errors = false;
     if (this.password == null || this.password.length === 0) {
       errors = true;
-      alert("Va rugam introduceti o parola valida.");
+      alert("Vă rugăm introduceți o parolă validă.");
     }
     if (this.confirmPassword == null || this.confirmPassword.length === 0) {
       errors = true;
-      alert("Va rugam confirmati parola.");
+      alert("Vă rugăm confirmați parola.");
     }
     if (this.password != this.confirmPassword) {
       errors = true;
-      alert("Va rugam confirmati corect parola.");
+      alert("Vă rugăm confirmați corect parola.");
     }
     if (!errors) {
       if (this.token != null && this.token.length > 0) {

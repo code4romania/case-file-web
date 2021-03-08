@@ -5,14 +5,14 @@
   </div>
 </div>
 <!-- Page content -->
-<div class="container-fluid" style="margin-top: -7.5rem !important; height: 100%; width: 100%;"> <!-- mt--7 -->
+<div class="container-fluid" style="margin-top: -7.5rem !important; height: 85%; width: 100%;"> <!-- mt--7 -->
   <!-- Table -->
   <div class="row">
     <div class="col">
       <div class="card shadow" style="width: 60%;">
         <div class="card-header border-0" style="padding-bottom: 0px;">          
             <div class="col-md-6">
-              <h3 class="mb-0" style="color: #3468EF;">{{ title }}</h3>              
+              <h3 class="mb-0" style="color: #01A4AE;">{{ title }}</h3>              
             </div>
         </div>
         <!-- Divider -->
@@ -27,7 +27,7 @@
               </div>
               <div class="col-md-9">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="ex: Fisa de evaluare psihologica..." id="description" name="description" [(ngModel)]="form.description">                  
+                  <input type="text" class="form-control" placeholder="ex: Fișă de evaluare psihologică..." id="description" name="description" [(ngModel)]="form.description">                  
                 </div>
               </div>            
             </div>
@@ -40,7 +40,7 @@
               <div class="col-md-9">
                 <div class="form-group">
                   <select class="form-control" name="selectedGender" [(ngModel)]="form.type">
-                    <option value="-1" selected="selected">Daca alegi public, acesta va fi vizibil tuturor utilizatorilor din contul tau</option>
+                    <option value="-1" selected="selected">Dacă alegi public, acesta va fi vizibil tuturor utilizatorilor din contul tău</option>
                     <option value="1">public</option>
                     <option value="0">privat</option>                 
                   </select>
@@ -49,7 +49,7 @@
             </div>            
             <div class="row">            
               <div class="col-md-12" align="right">
-                <button type="button" class="btn btn-primary my-4" style="background-color: #3468EF;" [routerLink]="['/section-create']" (click)="openSectionPage()" >Continua</button>
+                <button type="button" class="btn btn-primary my-4" style="background-color: #01A4AE;" [routerLink]="['/section-create']" (click)="openSectionPage()" >Continuă</button>
               </div>
             </div> 
           </form>

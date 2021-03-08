@@ -25,6 +25,7 @@ export class FormComponent implements OnInit {
   showSection: boolean;  
   formDate: Date;
   notes: Note[];
+  viewForm: boolean;
 
   constructor(private formsService: FormsService,private beneficiariesService: BeneficiariesService, private route: ActivatedRoute, private router: Router, private usersService: UsersService) { }
 
@@ -35,8 +36,10 @@ export class FormComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.formId = params['formId'];
+      this.viewForm = params['viewForm'] != undefined ? params['viewForm'] : false;
       });
-    console.log(this.formId);
+    //console.log(this.formId);
+    console.log(this.viewForm);
     
     this.loadForm(this.formId);
   }
@@ -50,18 +53,23 @@ export class FormComponent implements OnInit {
   onQDateSelect(event: any, question: FormQuestion) {
     var day = event.day + 1;
     question.optionsToQuestions[0].value = (new Date(event.year + '/' + event.month + '/' + day)).toISOString().slice(0,10);
-    // console.log("onQDateSelect: ");
-    // console.log(question.optionsToQuestions[0].value);
+    // //console.log("onQDateSelect: ");
+    // //console.log(question.optionsToQuestions[0].value);
   }
 
   private loadForm(formId: number) {
     this.formsService.getForm(formId).subscribe((result)=>{
       this.sections = result;
-      // console.log(result);
+      // //console.log(result);
       this.description = this.formsService.selectedForm.description;
-      var date = new Date(this.formsService.selectedForm.date);      
-      this.dateModel = { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };      
-      // console.log(this.sections);
+      var date = new Date(this.formsService.selectedForm.date);
+      if (date.getFullYear() == 1) {
+        date = new Date();
+      } 
+          
+      this.dateModel = { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
+            
+      // //console.log(this.sections);
 
       this.sections.forEach(section => {
         section.questions.forEach(question => { 
@@ -69,16 +77,16 @@ export class FormComponent implements OnInit {
           var note = new Note();
           note.questionId = question.questionId;
           question.notes.push(note);
-          // console.log("question.notes: ");
-          // console.log(question.notes);
+          // //console.log("question.notes: ");
+          // //console.log(question.notes);
           
           // question.optionsToQuestions.forEach(option => {
           //   option.isSelected = false;
-          //   // console.log(option);             
+          //   // //console.log(option);             
           // });
 
         })});
-      console.log(this.sections);    
+      //console.log(this.sections);    
     });
   }
 
@@ -102,7 +110,7 @@ export class FormComponent implements OnInit {
       }
     });
 
-    console.log(option);    
+    //console.log(option);    
   }
 
   onFileChange(event: any, question: FormQuestion) {
@@ -162,23 +170,23 @@ export class FormComponent implements OnInit {
             notesToSave.push(noteDto);
           });
 
-          console.log("notesToSave: ");
-          console.log(notesToSave);
+          //console.log("notesToSave: ");
+          //console.log(notesToSave);
         }
 
       });
     });
 
-    console.log("answerWrapper: ");
-    console.log(answerWrapper);
+    //console.log("answerWrapper: ");
+    //console.log(answerWrapper);
 
     // var answersSaved = false; todo: improve this
     this.formsService.saveAnswers(answerWrapper).subscribe((result)=>{
-      console.log(result);
+      //console.log(result);
 
       notesToSave.forEach(note => {
         this.formsService.saveNote(note).subscribe((result)=>{
-          console.log(result);
+          //console.log(result);
         });
       });
 

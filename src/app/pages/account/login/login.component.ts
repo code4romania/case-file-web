@@ -45,11 +45,11 @@ export class LoginComponent implements OnInit, OnDestroy {
               this.router.navigate(['/reset-password']);
             }
             else {
-              this.usersService.loadCurrentUserInfo().subscribe(result => 
-              { 
-                this.usersService.currentUser = result; 
+              // this.usersService.loadCurrentUserInfo().subscribe(result => 
+              // { 
+              //   this.usersService.currentUser = result; 
                 this.router.navigate(['/2fa']);
-              }); 
+              // }); 
             }           
         }, () => {
             this.invalid = true;

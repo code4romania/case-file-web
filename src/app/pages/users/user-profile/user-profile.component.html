@@ -8,16 +8,16 @@
 <div class="container-fluid" style="margin-top: -7.5rem !important;"> <!-- mt--7 -->
   <!-- Table -->
   <div class="row" style="padding-bottom: 20px;">
-    <div class="col">
+    <div class="col-md-7">
       <div class="card shadow">
         <div class="card-header border-0" style="padding-bottom: 0px;">
           <div class="row">
-            <div class="col-md-6">
-              <h3 class="mb-0" style="color: #3468EF;">Date asistent</h3>
-              <p style="color: #23278A">Acestea sunt informatiile de baza despre asistent.</p>
+            <div class="col-md-8">
+              <h3 class="mb-0" style="color: #01A4AE;">Date asistent</h3>
+              <p style="color: #23278A">Acestea sunt informațiile de bază despre asistent.</p>
             </div>
-            <div class="col-md-6" align="right">
-              <img src="./assets/img/icons/common/edit.png" style="padding-right: 5px;" [routerLink]="['/user']" (click)="editUser()">
+            <div class="col-md-4" align="right">
+              <img src="./assets/img/icons/common/edit.png" style="padding-right: 5px;" [routerLink]="['/user', user.userId]" (click)="editUser()">
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
         <div class="card-body border-0">
           <div class="row">
             <div class="col-md-3">
-              <p>Nume:</p>
+              <p>Nume și prenume:</p>
             </div>
             <div class="col-md-3">
               <label><b>{{ user.name }}</b></label>
@@ -34,13 +34,13 @@
             <div class="col-md-2">
               <p>Email:</p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" style="word-break: break-all; word-wrap: break-word;padding-right: 0px;">
               <label><b>{{ user.email }}</b></label>
             </div>
           </div>
           <div class="row">
             <div class="col-md-3">
-              <p>Data nasterii:</p>
+              <p>Data nașterii:</p>
             </div>
             <div class="col-md-3">
               <label><b>{{ user.birthDateString }}</b></label>
@@ -56,7 +56,7 @@
           <hr class="my-3">
           <div class="row">
             <div class="col-md-3">
-              <p>Specializare:</p>
+              <p>Specializare / profesie:</p>
             </div>
             <div class="col-md-3">
               <table ng-if="user.types">
@@ -79,8 +79,7 @@
         </div>            
       </div>
     </div>
-    <div class="col">      
-    </div>
+    
   </div>
   <div class="row">
     <div class="col">
@@ -88,8 +87,8 @@
         <div class="card-header border-0" style="padding-bottom: 0px;">
           <div class="row">
             <div class="col-md-6">
-              <h3 class="mb-0" style="color: #3468EF;">Lista beneficiari</h3>
-              <p style="color: #23278A">Aceasta este lista beneficiarilor alocati acestui utilizator.</p>
+              <h3 class="mb-0" style="color: #01A4AE;">Listă beneficiari</h3>
+              <p style="color: #23278A">Aceasta este lista beneficiarilor alocați acestui utilizator.</p>
             </div>
             <div class="col-md-6" align="right">              
             </div>
@@ -100,7 +99,7 @@
         <div class="card-header border-0"> 
           <div class="row">
             <div class="col-md-auto">
-              <p>Cauta: </p>
+              <p>Caută: </p>
             </div>         
             <div class="col-md-3" style="padding-left: 0px; ">            
               <div class="form-group">                
@@ -113,13 +112,13 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col" style="color: #3468EF; width: 5%;">Nr.</th>
-                <th scope="col" style="color: #3468EF;">Nume</th>
-                <th scope="col" style="color: #3468EF; ">Localitate</th>
-                <th scope="col" style="color: #3468EF; ">Judet</th>
-                <th scope="col" style="color: #3468EF; ">Asistent</th>
-                <th scope="col" style="color: #3468EF; width: 10%;">Varsta</th>
-                <th scope="col" style="color: #3468EF; width: 10%;">Data inregistrarii</th>
+                <th scope="col" style="color: #01A4AE; width: 5%;">Nr.</th>
+                <th scope="col" style="color: #01A4AE;">Nume</th>
+                <th scope="col" style="color: #01A4AE; ">Localitate</th>
+                <th scope="col" style="color: #01A4AE; ">Județ</th>
+                <th scope="col" style="color: #01A4AE; ">Asistent</th>
+                <th scope="col" style="color: #01A4AE; width: 10%;">Vârstă</th>
+                <th scope="col" style="color: #01A4AE; width: 10%;">Data înregistrării</th>
                 <th scope="col" style="width: 10%;"></th>
               </tr>
             </thead>
@@ -160,46 +159,24 @@
             </tbody>
           </table>
         </div>
-        <!-- *ngIf="beneficiaries && beneficiaries.length > 0" -->
         <div class="card-footer py-4">
           <nav aria-label="...">
-            <div class="row align-items-center justify-content-xl-between" *ngIf="beneficiaries && beneficiaries.length > 0">
+            <div class="row align-items-center justify-content-xl-between">
               <div class="col-md-6">
                 <div class="row">
-                  <p>Arata </p>&nbsp;&nbsp;
-                  <input type="text" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;" value="{{ pageSize }}" name="pageSize">  
-                  &nbsp;&nbsp; <p>intrari </p>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <p *ngIf="totalCount >= pageSize">Afiseaza 1 - {{ pageSize }} din {{ totalCount }} </p>
-                  <p *ngIf="totalCount < pageSize">Afiseaza 1 - {{ totalCount }} din {{ totalCount }} </p>
+                  <p>Arată </p>&nbsp;&nbsp;
+                  <input type="number" class="form-control" style="width: 60px; padding-top: 5px; padding-bottom: 5px; height: 30px;" value="{{ pageSize }}" name="pageSize" (change)="pageChanged($event)">  
+                  &nbsp;&nbsp; <p>intrări </p>                  
                 </div>                
               </div>
-              <div class="col-md-6">
-                <ul class="pagination justify-content-end mb-0">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="javascript:void(0)" tabindex="-1">
-                      <i class="fas fa-angle-left"></i>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="javascript:void(0)">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0)">2 <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0)">
-                      <i class="fas fa-angle-right"></i>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
+              <div class="col-md-6">      
+                <app-pagination [page]="page" [pageSize]="pageSize"
+                  [totalItems]="totalCount" (pageChanged)="pageChanged($event)">
+                </app-pagination>
               </div>
             </div>
           </nav>
-        </div>
+        </div>        
       </div>
     </div>
   </div>

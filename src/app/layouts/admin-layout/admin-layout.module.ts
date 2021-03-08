@@ -29,6 +29,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { SectionComponent } from 'src/app/pages/forms/section/section.component';
 import { QuestionComponent } from 'src/app/pages/forms/question/question.component';
 import { OptionComponent } from 'src/app/pages/forms/option/option.component';
+import { NgoComponent } from 'src/app/pages/ngo/ngo.component';
+import { ReportComponent } from '../../pages/statistics/report/report.component';
 
 @NgModule({
   imports: [
@@ -60,7 +62,9 @@ import { OptionComponent } from 'src/app/pages/forms/option/option.component';
     SectionCreateComponent,
     SectionComponent,
     QuestionComponent,
-    OptionComponent
+    OptionComponent,
+    NgoComponent,
+    ReportComponent
   ]
 })
 

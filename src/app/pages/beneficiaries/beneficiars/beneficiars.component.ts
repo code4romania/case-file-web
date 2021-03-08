@@ -51,7 +51,7 @@ export class BeneficiarsComponent implements OnInit {
   }
 
   public async beneficiarySelected(beneficiary: BeneficiaryInfo): Promise<void> {    
-    console.log(beneficiary);    
+    //console.log(beneficiary);    
     this.beneficiariesService.selectedBeneficiary = beneficiary;
   }
 

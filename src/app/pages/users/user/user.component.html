@@ -5,14 +5,14 @@
   </div>
 </div>
 <!-- Page content -->
-<div class="container-fluid" style="margin-top: -7.5rem !important;"> <!-- mt--7 -->
+<div class="container-fluid" style="margin-top: -7.5rem !important"> <!-- mt--7 -->
   <!-- Table -->
   <div class="row">
     <div class="col">
       <div class="card shadow" style="width: 60%;">
         <div class="card-header border-0" style="padding-bottom: 0px;">          
             <div class="col-md-6">
-              <h3 class="mb-0" style="color: #3468EF;">{{ title }}</h3>              
+              <h3 class="mb-0" style="color: #01A4AE;">{{ title }}</h3>              
             </div>
         </div>
         <!-- Divider -->
@@ -22,7 +22,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <p>Nume*</p>
+                  <p>Nume și prenume*</p>
                 </div>
               </div>
               <div class="col-md-9">
@@ -34,7 +34,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <p>Data nasterii*</p>
+                  <p>Data nașterii*</p>
                 </div>
               </div>
               <div class="col-md-9">
@@ -43,8 +43,8 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                     </div>                  
-                    <input class="form-control datepicker" placeholder="Alege o data" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
-                    name="dp" [(ngModel)]="dateModel" (dateSelect) = "onDateSelect($event)" />                    
+                    <input class="form-control datepicker" placeholder="Alege o dată" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
+                    name="dp" [(ngModel)]="dateModel" (dateSelect) = "onDateSelect($event)" [minDate]="{year: 1921, month: 1, day: 1}" />                    
                   </div>
                 </div>
               </div>
@@ -52,21 +52,21 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <p>Specializare</p>
+                  <p>Specializare / profesie</p>
                 </div>
               </div>
               <div class="col-md-9">
                 <div class="form-group">
                   <select class="form-control" multiple name="selectedTypes" [(ngModel)]="user.types">
-                    <option value="-1" selected="selected">Selecteaza una sau mai multe specializari</option>
-                    <option value="0">Asistent comunitar/a</option>
+                    <option value="-1" selected="selected">Selectează una sau mai multe specializări</option>
+                    <option value="0">Asistent comunitar/ă</option>
                     <option value="1">Asistent social</option>
                     <option value="2">Mediator sanitar</option>
                     <option value="3">Medic pediatru</option>
                     <option value="4">Medic ginecolog</option>
                     <option value="5">Psiholog</option>
                     <option value="6">Logoped</option>
-                    <option value="7">Alta specializare</option>
+                    <option value="7">Altă specializare</option>
                   </select>
                 </div>
               </div>            
@@ -113,7 +113,7 @@
             </div>            
             <div class="row">            
               <div class="col-md-12" align="right">
-                <button type="submit" class="btn btn-primary my-4" style="background-color: #3468EF;">Continua</button>
+                <button type="submit" class="btn btn-primary my-4" style="background-color: #01A4AE;">Continuă</button>
               </div>
             </div> 
           </form>

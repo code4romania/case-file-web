@@ -1,0 +1,419 @@
+<!-- Page content -->
+<div class="container-fluid" > <!-- mt--7 -->
+  <div class="row" style="padding-top: 1%; padding-bottom: 5%;">
+    <div class="col-md-3" style="display: table; height: 100%;">
+      <div class="card shadow" style="height: 271px; width: 383;">
+        <div class="card-header border-0" style="padding-bottom: 10px;padding-top: 10px;">
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="mb-0" style="color: #01A4AE;">Cazuri active - luna curentă</h3>
+            </div>
+          </div>
+        </div>
+        <!-- Divider -->
+        <hr class="my-0">
+        <div class="card-body shadow" style="display: table-cell;text-align: center; display:grid; align-items:center;">
+          <h3 class="mb-0" style="color: #01A4AE;font-size: 2.5rem;">{{ activeCasesCurrentMonth }}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3" style="display: table; height: 100%;">
+      <div class="card shadow" style="height: 271px; width: 383;">
+        <div class="card-header border-0" style="padding-bottom: 10px;padding-top: 10px;">
+          <h3 class="mb-0" style="color: #01A4AE;">Copii în regim de centru de zi</h3>
+        </div>
+        <!-- Divider -->
+        <hr class="my-0">
+        <div class="card-body shadow" style="display: table-cell;text-align: center; display:grid; align-items:center;">
+          <h3 class="mb-0" style="color: #01A4AE;font-size: 2.5rem;">{{ activeCasesChildren }}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3" style="display: table; height: 100%;">
+      <div class="card shadow" style="height: 271px; width: 383;">
+        <div class="card-header border-0" style="padding-bottom: 10px;padding-top: 10px;">
+          <h3 class="mb-0" style="color: #01A4AE;">Cazuri active - luna anterioară</h3>
+        </div>
+        <!-- Divider -->
+        <hr class="my-0">
+        <div class="card-body shadow" style="display: table-cell;text-align: center; display:grid; align-items:center;">
+          <h3 class="mb-0" style="color: #01A4AE;font-size: 2.5rem;">{{ activeCasesPreviousMonth }}</h3>
+        </div>
+      </div>
+    </div>   
+  </div>
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow" style="width: 60%;">
+        <div class="card-header border-0" style="padding-bottom: 20px;padding-top: 20px;">
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="mb-0" style="color: #01A4AE;">{{ title }}</h3>
+            </div>
+          </div>
+        </div>
+        <!-- Divider -->
+        <hr class="my-0">
+        <div class="card-body border-0">
+          <form role="form" (ngSubmit)="addReport()"> 
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <p>Tip raport</p>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="form-group">
+                <select class="form-control" name="reportType" [(ngModel)]="report.reportType" [attr.disabled]="viewReport ? '' : null">
+                  <option value="-1" selected="selected">Selectează tipul raportului</option>
+                  <option value="0">Fișă de monitorizare lunară</option>
+                  <option value="1">Fișă de monitorizare trimestrială</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <p>Data completării</p>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="form-group">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                  </div>                  
+                  <input *ngIf="!viewReport" class="form-control datepicker" placeholder="Alege o dată" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
+                  name="dp" [(ngModel)]="dateModel" (dateSelect) = "onDateSelect($event)" /> 
+                  <input *ngIf="viewReport" class="form-control datepicker" placeholder="Alege o dată" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
+                  name="dp" [(ngModel)]="dateModel" (dateSelect) = "onDateSelect($event)" disabled />                   
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <p>Centrul</p>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="ex: FDP Cluj" id="center" name="center" [(ngModel)]="report.center" [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <p>Perioada raportată</p>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="ex: ianuarie 2021" id="period" name="period" [(ngModel)]="report.period" [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+
+          <div class="row" style="padding-top: 40px; padding-bottom: 20px;">
+            <div class="col-md-12">
+              <h3 class="mb-0" style="color: #01A4AE;">COPII AFLAŢI ÎN EVIDENŢA CENTRULUI DE ZI</h3>
+            </div>
+          </div>
+
+          <div class="row" style="padding-bottom: 40px;">
+            <div class="col-md-12">
+              <h3 style="text-decoration: underline;">Copii din familie/ comunitate</h3>
+            </div>
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. cazuri active în ultima zi a lunii precedente</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="activeCasesLastDayOfPreviousMonth" name="activeCasesLastDayOfPreviousMonth" 
+                [(ngModel)]="report.activeCasesLastDayOfPreviousMonth" [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. cazuri noi, apărute în cursul lunii raportate</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="newCasesCurrentMonth" name="newCasesCurrentMonth" [(ngModel)]="report.newCasesCurrentMonth"
+                [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. cazuri închise în cursul lunii raportate - IN FAMILIE</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="closedCasesCurrentMonthFamily" name="closedCasesCurrentMonthFamily" 
+                [(ngModel)]="report.closedCasesCurrentMonthFamily" [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. cazuri închise în cursul lunii raportate - Asistent maternal</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="closedCasesCurrentMonthAssistent" name="closedCasesCurrentMonthAssistent" 
+                [(ngModel)]="report.closedCasesCurrentMonthAssistent" [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. cazuri închise în cursul lunii raportate - Alte instituții</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="closedCasesCurrentMonthOtherOrg" name="closedCasesCurrentMonthOtherOrg" 
+                [(ngModel)]="report.closedCasesCurrentMonthOtherOrg" [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. cazuri active în ultima zi a lunii raportate</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="activeCasesLastDayOfCurrentMonth" name="activeCasesLastDayOfCurrentMonth" 
+                [(ngModel)]="report.activeCasesLastDayOfCurrentMonth" [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+
+          <div class="row" style="padding-top: 30px; padding-bottom: 40px;">
+            <div class="col-md-12">
+              <h3 style="text-decoration: underline;">Copii din unităţi de protecţie rezidenţială</h3>
+            </div>
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. cazuri active în ultima zi a lunii precedente</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="activeCasesLastDayOfPreviousMonthUR" name="activeCasesLastDayOfPreviousMonthUR" 
+                [(ngModel)]="report.activeCasesLastDayOfPreviousMonthUR" [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. cazuri noi, apărute în cursul lunii raportate</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="newCasesCurrentMonthUR" name="newCasesCurrentMonthUR" 
+                [(ngModel)]="report.newCasesCurrentMonthUR" [attr.disabled]="viewReport ? '' : null">     
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. cazuri închise în cursul lunii raportate - IN FAMILIE</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="closedCasesCurrentMonthFamilyUR" name="closedCasesCurrentMonthFamilyUR" 
+                [(ngModel)]="report.closedCasesCurrentMonthFamilyUR" [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. cazuri închise în cursul lunii raportate - Asistent maternal</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="closedCasesCurrentMonthAssistentUR" name="closedCasesCurrentMonthAssistentUR" 
+                [(ngModel)]="report.closedCasesCurrentMonthAssistentUR" [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. cazuri închise în cursul lunii raportate - Alte instituții</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="closedCasesCurrentMonthOtherOrgUR" name="closedCasesCurrentMonthOtherOrgUR" 
+                [(ngModel)]="report.closedCasesCurrentMonthOtherOrgUR" [attr.disabled]="viewReport ? '' : null">
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. cazuri active în ultima zi a lunii raportate</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="activeCasesLastDayOfCurrentMonthUR" name="activeCasesLastDayOfCurrentMonthUR" 
+                [(ngModel)]="report.activeCasesLastDayOfCurrentMonthUR" [attr.disabled]="viewReport ? '' : null"> 
+              </div>
+            </div>            
+          </div>
+
+          <div class="row" style="padding-top: 40px; padding-bottom: 20px;">
+            <div class="col-md-12">
+              <h3 class="mb-0" style="color: #01A4AE;">SITUAŢIA PE GRUPE DE VÂRSTĂ</h3>
+            </div>
+          </div>
+          <div class="row" style="padding-bottom: 40px;">
+            <div class="col-md-12">
+              <h3 style="text-decoration: underline;">Copii în regim de centru de zi</h3>
+            </div>
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>Nr. total copii</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="totalChildrenNo" name="totalChildrenNo" [(ngModel)]="report.totalChildrenNo" [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p><1</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="childrenLessThanOneNo" name="childrenLessThanOneNo" [(ngModel)]="report.childrenLessThanOneNo"
+                [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>1-2</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="childrenOneToTwoNo" name="childrenOneToTwoNo" [(ngModel)]="report.childrenOneToTwoNo"
+                  [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>3-6</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="childrenThreeToSixNo" name="childrenThreeToSixNo" [(ngModel)]="report.childrenThreeToSixNo"
+                  [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>7-9</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="childrenSevenToNineNo" name="childrenSevenToNineNo" [(ngModel)]="report.childrenSevenToNineNo"
+                [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>10-13</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="childrenTenToThirteenNo" name="childrenTenToThirteenNo" [(ngModel)]="report.childrenTenToThirteenNo"
+                [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>14-17</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="childrenFourteenToSeventeenNo" name="childrenFourteenToSeventeenNo" 
+                  [(ngModel)]="report.childrenFourteenToSeventeenNo" [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>
+          <div class="row" style="padding-left: 9%;">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>>= 18</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="childrenEighteenOrMoreNo" name="childrenEighteenOrMoreNo" [(ngModel)]="report.childrenEighteenOrMoreNo"
+                  [attr.disabled]="viewReport ? '' : null">                  
+              </div>
+            </div>            
+          </div>          
+
+          <div class="row" *ngIf="!viewReport">            
+            <div class="col-md-12" align="right">
+              <button type="submit" class="btn btn-primary my-4" style="background-color: #01A4AE;">Salvează</button>
+            </div>
+          </div>
+        </form>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
